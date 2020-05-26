@@ -8,11 +8,9 @@ package com.tivconsultancy.tivGUI;
 import com.tivconsultancy.tivGUI.menue.tivMenuBar;
 import com.tivconsultancy.tivGUI.plots.TIVPlotArea;
 import com.tivconsultancy.tivGUI.tables.tivSettingsDetails;
-import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.tivGUI.trees.tivImageTree;
 import com.tivconsultancy.tivGUI.viewer.ParentViewer;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.MenuBar;
@@ -23,7 +21,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.layout.RowConstraints;
-import javax.swing.ImageIcon;
 
 /**
  *

@@ -101,7 +101,9 @@ public class StartUpController extends BasicController {
 
     @Override
     public List<File> getInputFiles(String name) {
-        File fFolder = new File("D:\\ThomasBubsize\\Pos0\\3slpm\\_0");
+        System.out.println(System.getProperty("user.home") + File.separatorChar + "My Documents");
+        File fFolder = new File(System.getProperty("user.home") + File.separatorChar + "Pictures");
+//        File fFolder = new File("D:\\ThomasBubsize\\Pos0\\3slpm\\_0");
         List<File> ReadInFile = new ArrayList<>();
         for (File f : fFolder.listFiles()) {
             if (f.isDirectory()) {

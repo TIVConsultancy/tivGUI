@@ -51,7 +51,6 @@ public class tivTabbedTree extends TabPane {
         getTabs().add(tabImages);
         getTabs().add(tabSettings);
         getTabs().add(tabLog);
-        StaticReferences.getlog().log(Level.SEVERE, "Severe tets");
 
     }
     

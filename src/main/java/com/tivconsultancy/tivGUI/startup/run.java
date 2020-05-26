@@ -67,8 +67,8 @@ public class run extends Application {
 //        PIVMethod method = new PIVMethod(new File("D:\\Sync\\TIVConsultancy\\_Customers\\HZDR\\DataProject\\FolderHZDRDataManagement\\Examples-2020-3-30 20.46.28\\NabilLongColumn\\NaCl\\1p0"));
         tivGUI.startNewSession();
 //        StaticReferences.getlog().addHandler(Windowhandler.getInstance());
-        StaticReferences.getlog().log(Level.SEVERE, "sfsdfsdfsdf");
-        Windowhandler.log(Level.SEVERE, "sfsdf", new Throwable());
+//        StaticReferences.getlog().log(Level.SEVERE, "sfsdfsdfsdf");
+//        Windowhandler.log(Level.SEVERE, "sfsdf", new Throwable());
 //        StaticReferences.controller.getCurrentMethod().run();
             new TempOnDisk(null);
     }
