@@ -63,16 +63,9 @@ public abstract class BasicController implements Controller{
             }
         };
         for (Protocol p : newMethod.getProtocols()) {
-            for (SettingsCluster c : p.lsClusters) {
-                for (SettingObject o : c.getSettings()) {
-                    if(o.ident.equals(SettingObject.SettingsType.Boolean)){
-                        hints.addSettingsObject(o);
-                        hints.addSettingsObject(new SettingObject(o.getName(), !((Boolean) o.sValue), SettingObject.SettingsType.Boolean));
-                    }else{
-                        hints.addSettingsObject(o);
-                    }                    
-                }
-            }
+            for(SettingObject o : p.getHints()){
+                hints.addSettingsObject(o);
+            }        
         }
     }
     
@@ -105,6 +98,10 @@ public abstract class BasicController implements Controller{
     public Window getMainWindows() {
         return main;
     }
+    
+    public MainFrame getMainFrame(){
+        return mainFrame;
+    }
 
     @Override
     public void setScene(Scene s) {
@@ -135,7 +132,7 @@ public abstract class BasicController implements Controller{
         } catch (ClassNotFoundException c) {
             StaticReferences.getlog().log(Level.SEVERE, "Settings file corrupt or old version", c);
         }
-
+        mainFrame.startNewSettings();
     }
 
     @Override
@@ -155,6 +152,12 @@ public abstract class BasicController implements Controller{
     @Override
     public void setGUI(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        try {
+            data.getIndexedResults().addObjectToRefresh(mainFrame.getPlotArea());
+        } catch (Exception e) {
+            StaticReferences.getlog().log(Level.SEVERE, "Cannot connect Plot Area to database", new Throwable(this.getClass().toString()));
+        }
+        
     }
     
     @Override

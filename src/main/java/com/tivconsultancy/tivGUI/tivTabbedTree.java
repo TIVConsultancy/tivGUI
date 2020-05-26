@@ -135,5 +135,9 @@ public class tivTabbedTree extends TabPane {
         imageTree.startNewSession();
         settingsTree.startNewSession();
     }
+    
+    public void startNewSettingsTree(){
+        settingsTree.startNewSession();
+    }
 
 }

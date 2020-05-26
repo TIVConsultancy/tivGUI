@@ -9,6 +9,7 @@ import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
 import com.tivconsultancy.tivGUI.controller.Controller;
 import com.tivconsultancy.tivGUI.logging.Windowhandler;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.logging.Logger;
@@ -48,7 +49,7 @@ public final class StaticReferences {
             }
         }
         return new ImageView(wr).getImage();
-    }    
+    }       
     
     public static void initIcons(Object o) {        
     }

@@ -23,6 +23,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.layout.RowConstraints;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -49,9 +50,10 @@ public class MainFrame extends GridPane {
 
     protected ScrollPane scrollPanDetails;
     protected AnchorPane scrollPaneDataViewer;
-    
+
     public static List<Image> iconsTIVGUIMainFrame;
-    
+    public static Image loadGif;
+
     ParentViewer dataView;
 
     public MainFrame() {
@@ -67,7 +69,7 @@ public class MainFrame extends GridPane {
         getChildren().add(gridContentPane);
         setContentToCells();
         setContraints();
-        
+
     }
 
     private void initComponents() {
@@ -79,10 +81,14 @@ public class MainFrame extends GridPane {
         tableDetails = new tivSettingsDetails();
 
         scrollPaneDataViewer = new AnchorPane();
-        anchorTimePlot = new TIVPlotArea();        
+        anchorTimePlot = new TIVPlotArea();
 
         anchorDetailView = new AnchorPane();
         dataView = new ParentViewer();
+    }
+    
+    public TIVPlotArea getPlotArea(){
+        return anchorTimePlot;
     }
 
     private void setSize() {
@@ -110,8 +116,8 @@ public class MainFrame extends GridPane {
         tabPane.setTabClosingPolicy(javafx.scene.control.TabPane.TabClosingPolicy.UNAVAILABLE);
         gridContentPane.getChildren().add(tabPane);
     }
-    
-    private void setDataView(){        
+
+    private void setDataView() {
         scrollPaneDataViewer.getChildren().add(dataView);
         AnchorPane.setTopAnchor(dataView, 0.0);
         AnchorPane.setRightAnchor(dataView, 0.0);
@@ -175,13 +181,17 @@ public class MainFrame extends GridPane {
         gridContentPane.getRowConstraints().add(rowConstraintsLowerContent);
 
     }
-    
-    public static void setIcons(Class<?> o, List<String> source){
+
+    public static void setIcons(Class<?> o, List<String> source) {
         iconsTIVGUIMainFrame = new ArrayList<>();
-        for(String s : source){
-             iconsTIVGUIMainFrame.add(new Image(o.getResourceAsStream(s)));
+        for (String s : source) {
+            iconsTIVGUIMainFrame.add(new Image(o.getResourceAsStream(s)));
         }
-    } 
+    }
+
+    public static void setLoadPicture(Class<?> o, String source) {
+        loadGif = new Image(o.getResourceAsStream(source));
+    }
 
     public static List<Image> getIcon() {
 //        MainFrame.icons = new ArrayList<>();
@@ -195,13 +205,17 @@ public class MainFrame extends GridPane {
 
         return iconsTIVGUIMainFrame;
     }
-    
-    public void startNewSession(){        
+
+    public void startNewSession() {
         tabPane.startNewSession();
     }
     
-    public File getSelectedFile(){
+    public void startNewSettings() {
+        tabPane.startNewSettingsTree();
+    }
+
+    public File getSelectedFile() {
         return ((tivImageTree.TreeItemFile) tabPane.imageTree.getSelectionModel().getSelectedItem()).getFile();
-    }    
+    }
 
 }

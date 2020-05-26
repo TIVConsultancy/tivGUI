@@ -12,6 +12,7 @@ import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
 import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
@@ -27,8 +28,8 @@ public class StartUpProtocol extends Protocol {
 
     private void buildLookUp() {
         outPutImages = new LookUp<>();
-        outPutImages.add(new NameObject<>("StartUp1", new ImageInt(50, 50, 0.0)));
-        outPutImages.add(new NameObject<>("StartUp2", new ImageInt(50, 50, 0.0)));
+        outPutImages.add(new NameObject<>("StartUp1", new ImageInt(50, 50, 0.0).getBuffImage()));
+        outPutImages.add(new NameObject<>("StartUp2", new ImageInt(50, 50, 0.0).getBuffImage()));
     }    
     
     private void initSettings(){
@@ -63,7 +64,7 @@ public class StartUpProtocol extends Protocol {
     }
 
     @Override
-    public ImageInt getView(String identFromViewer) {
+    public BufferedImage getView(String identFromViewer) {
         return outPutImages.get(identFromViewer);
     }
 

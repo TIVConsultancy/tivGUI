@@ -106,7 +106,7 @@ public class StartUpSubControllerMenu implements subControllerMenu {
             public void handle(ActionEvent t) {
                 FileChooser fileChooser = new FileChooser();                
                 fileChooser.setTitle("Export Settings");
-                File selectedFile = fileChooser.showOpenDialog(StaticReferences.controller.getMainWindows());
+                File selectedFile = fileChooser.showSaveDialog(StaticReferences.controller.getMainWindows());
                 StaticReferences.controller.exportSettings(selectedFile);
             }
         };

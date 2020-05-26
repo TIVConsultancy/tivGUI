@@ -5,7 +5,6 @@
  */
 package com.tivconsultancy.tivGUI.controller;
 
-import com.tivconsultancy.opentiv.math.specials.LookUp;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

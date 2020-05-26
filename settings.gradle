@@ -1,3 +1,0 @@
-rootProject.name = 'tivGUI'
-include ":openTIV"
-project(":openTIV").projectDir = file("E:\\Sync\\TIVConsultancy\\openTIV\\publish\\openTIV")

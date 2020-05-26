@@ -77,7 +77,7 @@ public class StartUpSubControllerViews implements subControllerViews {
                 if(p.getView(s.toString()) == null){
                     lookupTable.get(s.toString()).update(new ImageInt(50, 50, 0).getBuffImage());
                 }else{
-                    lookupTable.get(s.toString()).update(p.getView(s.toString()).getBuffImage());
+                    lookupTable.get(s.toString()).update(p.getView(s.toString()));
                 }
                 
             }

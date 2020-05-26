@@ -29,6 +29,7 @@ public interface Controller {
     public List<File> getInputFiles(String name);
     public Method getCurrentMethod();
     public Window getMainWindows();
+    public MainFrame getMainFrame();
     public File getCurrentFileSelected();
     
     public subControllerViews getViewController(String ident);

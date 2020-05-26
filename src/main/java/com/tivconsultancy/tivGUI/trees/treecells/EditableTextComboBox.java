@@ -56,9 +56,9 @@ public class EditableTextComboBox extends TreeCell<TreeContentClass> {
             setTextAfterInput(getDummyText());
             return;
         }
-        if (combBox == null) {
+//        if (combBox == null) {
             createCombBox();
-        }
+//        }
         combBox.setPromptText(getItem().toString());
         setGraphic(combBox);
         combBox.requestFocus();

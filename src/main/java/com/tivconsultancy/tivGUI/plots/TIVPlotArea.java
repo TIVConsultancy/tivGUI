@@ -13,6 +13,7 @@ import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.geometry.Point2D;
 import javafx.geometry.Side;
@@ -46,11 +47,10 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
     private int colorCounter = 0;
     private int symbolCounter = 0;
 
-    
     public TIVPlotArea() {
         this(null);
     }
-    
+
     public TIVPlotArea(Region parent) {
         this.parent = parent;
         setDefault();
@@ -87,7 +87,7 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
         linePlot.setLegendSide(Side.LEFT);
         linePlot.getYAxis().setLabel(null);
         linePlot.getXAxis().setLabel("Index");
- 
+
         StaticReferences.controller.getOverTimeResults().addObjectToRefresh(this);
     }
 
@@ -126,8 +126,13 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
             xy.setName(s);
             clickedSeries.set(s, xy);
             for (int i = 0; i < StaticReferences.controller.getOverTimeResults().getSize(); i++) {
-                Double value = StaticReferences.controller.getOverTimeResults().get(i, s);
-                xy.getData().add(new XYChart.Data(i, value));
+                try {
+                    Double value = StaticReferences.controller.getOverTimeResults().getIndexBased(i, s);
+                    Integer index = StaticReferences.controller.getOverTimeResults().getEntry(i);
+                    xy.getData().add(new XYChart.Data(index, value));
+                } catch (Exception e) {
+                    StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);
+                }
             }
             linePlot.getData().add(xy);
         }
