@@ -1,0 +1,15 @@
+com.tivconsultancy.tivGUI
+com.tivconsultancy.tivGUI.controller
+com.tivconsultancy.tivGUI.helpfunctions
+com.tivconsultancy.tivGUI.logging
+com.tivconsultancy.tivGUI.menue
+com.tivconsultancy.tivGUI.plots
+com.tivconsultancy.tivGUI.startup
+com.tivconsultancy.tivGUI.tables
+com.tivconsultancy.tivGUI.trees
+com.tivconsultancy.tivGUI.trees.tivcallbacks
+com.tivconsultancy.tivGUI.trees.treecells
+com.tivconsultancy.tivGUI.trees.treecells.contentclasses
+com.tivconsultancy.tivGUI.viewer
+com.tivconsultancy.tivGUI.viewer.tree
+trash
