@@ -12,9 +12,10 @@ import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_PreProcessor;
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_ReadIMGFiles;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
-import com.tivconsultancy.opentiv.highlevel.protocols.Result1D;
+import com.tivconsultancy.opentiv.datamodels.Result1D;
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
+import com.tivconsultancy.tivGUI.StaticReferences;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,12 @@ import java.util.logging.Logger;
  */
 public class StartUpMethod implements Method {
 
-    protected Result1D results1D;
     private File currentFile = null;
 
     LookUp<Protocol> methods;
 
     public StartUpMethod() {
         initProtocols();
-        startNewTimeStep();
     }
 
     private void initProtocols() {
@@ -45,19 +44,19 @@ public class StartUpMethod implements Method {
         methods.add(new NameObject<>("preproc", new Prot_PreProcessor()));
     }
 
-    private void startNewTimeStep() {
-        results1D = new Result1D();
-        for (Protocol pro : getProtocols()) {
-            for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {
-                results1D.addResult(e.toString(), Double.NaN);
-            }
-        }
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(StartUpMethod.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void startNewTimeStep() {
+//        StaticReferences.controller results1D = new Result1D();
+//        for (Protocol pro : getProtocols()) {
+//            for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {
+//                results1D.addResult(e.toString(), Double.NaN);
+//            }
+//        }
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(StartUpMethod.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     @Override
     public List<ImagePath> getInputImages() {
@@ -67,17 +66,7 @@ public class StartUpMethod implements Method {
     @Override
     public List<Protocol> getProtocols() {
         return methods.getValues();
-    }
-
-    @Override
-    public void set1DResult(NameSpaceProtocolResults1D e) {
-
-    }
-
-    @Override
-    public Result1D get1DResults() {
-        return results1D;
-    }
+    }    
 
     @Override
     public void readInFileForView(File f) throws Exception {
@@ -105,8 +94,6 @@ public class StartUpMethod implements Method {
 
     @Override
     public void run() throws Exception {
-
-        startNewTimeStep();
         for (Protocol p : getProtocols()) {
             try {
                 getProtocol("read").run(currentFile);
@@ -115,7 +102,7 @@ public class StartUpMethod implements Method {
                 throw ex;
             }
             for (NameSpaceProtocolResults1D e : p.get1DResultsNames()) {
-                results1D.setResult(e.toString(), p.getOverTimesResult(e));
+                StaticReferences.controller.get1DResults().setResult(e.toString(), p.getOverTimesResult(e));
             }
         }
     }

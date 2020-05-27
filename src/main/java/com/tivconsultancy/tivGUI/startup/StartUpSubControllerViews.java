@@ -7,7 +7,6 @@ package com.tivconsultancy.tivGUI.startup;
 
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
-import com.tivconsultancy.tivGUI.controller.Controller;
 import com.tivconsultancy.tivGUI.controller.subControllerViews;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import com.tivconsultancy.opentiv.imageproc.primitives.ImageInt;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import com.tivconsultancy.tivGUI.controller.ControllerUI;
 
 /**
  *
@@ -24,10 +24,10 @@ import javafx.scene.control.Label;
  */
 public class StartUpSubControllerViews implements subControllerViews {
 
-    public Controller main;
+    public ControllerUI main;
     private LookUp<ViewerContainer> lookupTable;
 
-    public StartUpSubControllerViews(Controller main) {
+    public StartUpSubControllerViews(ControllerUI main) {
         this.main = main;
         buildLookUp();
     }

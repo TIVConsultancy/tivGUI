@@ -7,7 +7,6 @@ package com.tivconsultancy.tivGUI;
 
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
-import com.tivconsultancy.tivGUI.controller.Controller;
 import com.tivconsultancy.tivGUI.logging.Windowhandler;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -18,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import org.apache.commons.logging.Log;
+import com.tivconsultancy.tivGUI.controller.ControllerUI;
 
 /**
  *
@@ -25,7 +25,7 @@ import org.apache.commons.logging.Log;
  */
 public final class StaticReferences {
 
-    public static Controller controller = null;
+    public static ControllerUI controller = null;
     
     private static Logger logger = Logger.getLogger("tivGUI");
 

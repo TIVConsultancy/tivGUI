@@ -32,7 +32,7 @@ import javafx.stage.Window;
  *
  * @author TZ ThomasZiegenhein@TIVConsultancy.com +1 480 494 7254
  */
-public abstract class BasicController implements Controller{
+public abstract class BasicController implements ControllerUI{
     
     protected Method currentMethod;
     protected subControllerViews subViews;

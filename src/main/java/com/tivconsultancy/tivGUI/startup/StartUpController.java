@@ -5,12 +5,18 @@
  */
 package com.tivconsultancy.tivGUI.startup;
 
+import com.tivconsultancy.opentiv.datamodels.IndexableResults;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
+import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D;
+import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
+import com.tivconsultancy.opentiv.datamodels.Result1D;
+import com.tivconsultancy.opentiv.datamodels.Results1DPlotAble;
 import com.tivconsultancy.tivGUI.controller.BasicController;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +24,9 @@ import java.util.logging.Logger;
  *
  * @author TZ ThomasZiegenhein@TIVConsultancy.com +1 480 494 7254
  */
-public class StartUpController extends BasicController {    
+public class StartUpController extends BasicController {
+
+    protected Result1D results1D;
 
     public StartUpController() {
         this.main = null;
@@ -44,12 +52,12 @@ public class StartUpController extends BasicController {
     public void startNewMethod(Method newMethod) {
         currentMethod = newMethod;
         initDatabase();
-    }        
+    }
 
     private void setExcludeHints() {
         excludeHints = new ArrayList<>();
         this.excludeHints.add("SartUp_NoEdit");
-    }        
+    }
 
     @Override
     public void loadSession(File f) {
@@ -69,7 +77,7 @@ public class StartUpController extends BasicController {
             public void run() {
                 try {
                     getCurrentMethod().run();
-                    data.set1DRes(currentStep, getCurrentMethod().get1DResults());
+                    data.setRes(currentStep, (IndexableResults) get1DResults());
                     subViews.update();
                 } catch (Exception ex) {
                     StaticReferences.getlog().log(Level.SEVERE, "Unable to run : " + ex.getMessage(), ex);
@@ -87,7 +95,7 @@ public class StartUpController extends BasicController {
                 for (int i = 0; i < 10; i++) {
                     try {
                         getCurrentMethod().run();
-                        data.set1DRes(i, getCurrentMethod().get1DResults());
+                        data.setRes(i, (IndexableResults) get1DResults());
                         subViews.update();
                     } catch (Exception ex) {
                         StaticReferences.getlog().log(Level.SEVERE, "Unable to run : " + ex.getMessage(), ex);
@@ -96,8 +104,6 @@ public class StartUpController extends BasicController {
             }
         }.start();
     }
-
-    
 
     @Override
     public List<File> getInputFiles(String name) {
@@ -112,18 +118,38 @@ public class StartUpController extends BasicController {
             ReadInFile.add(f);
         }
         return ReadInFile;
-    }   
+    }
 
     @Override
     public void setSelectedFile(File f) {
         this.selectedFile = f;
         this.getCurrentMethod().setFiles(new File[]{f});
-        try {            
-            getCurrentMethod().readInFileForView(f);            
+        try {
+            getCurrentMethod().readInFileForView(f);
         } catch (Exception ex) {
             Logger.getLogger(StartUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
         subViews.update();
+    }
+
+    @Override
+    public Results1DPlotAble get1DResults() {
+        return results1D;
+    }
+
+    @Override
+    public void startNewTimeStep() {
+        results1D = new Result1D();
+        for (Protocol pro : getCurrentMethod().getProtocols()) {
+            for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {
+                results1D.addResult(e.toString(), Double.NaN);
+            }
+        }
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(StartUpMethod.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
