@@ -8,15 +8,12 @@ package com.tivconsultancy.tivGUI.viewer;
 import com.tivconsultancy.opentiv.imageproc.primitives.ImageInt;
 import com.tivconsultancy.tivGUI.helpfunctions.ImageViewWithExtraFunctions;
 import java.awt.image.BufferedImage;
-import java.util.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 /**
  *

@@ -44,7 +44,7 @@ public class StartUpMethod implements Method {
         methods.add(new NameObject<>("preproc", new Prot_PreProcessor()));
     }
 
-//    private void startNewTimeStep() {
+//    private void startNewIndexStep() {
 //        StaticReferences.controller results1D = new Result1D();
 //        for (Protocol pro : getProtocols()) {
 //            for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {

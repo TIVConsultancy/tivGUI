@@ -138,7 +138,7 @@ public class StartUpController extends BasicController {
     }
 
     @Override
-    public void startNewTimeStep() {
+    public void startNewIndexStep() {
         results1D = new Result1D();
         for (Protocol pro : getCurrentMethod().getProtocols()) {
             for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {

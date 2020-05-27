@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class StartUpProtocol extends Protocol {    
     
+    protected LookUp<BufferedImage> outPutImages;
+    
     public StartUpProtocol() {
         buildLookUp();
         initSettings();
@@ -91,6 +93,13 @@ public class StartUpProtocol extends Protocol {
     @Override
     public Object[] getResults() {
         return new Object[]{new ImageInt(50, 50, 0.0)};
+    }
+
+    @Override
+    public void setImage(BufferedImage bi) {
+        for(String s : getIdentForViews()){
+            outPutImages.set(s, bi);
+        } 
     }
     
     private enum NameSpaceProtocol implements NameSpaceProtocolResults1D{
