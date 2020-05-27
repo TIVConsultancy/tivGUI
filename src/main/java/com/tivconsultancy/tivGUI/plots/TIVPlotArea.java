@@ -88,7 +88,7 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
         linePlot.getYAxis().setLabel(null);
         linePlot.getXAxis().setLabel("Index");
 
-        StaticReferences.controller.getOverTimeResults().addObjectToRefresh(this);
+        StaticReferences.controller.addObjectToRefresh(this);
     }
 
     private void initChoices() {

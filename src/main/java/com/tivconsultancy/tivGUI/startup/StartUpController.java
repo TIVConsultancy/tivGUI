@@ -5,7 +5,9 @@
  */
 package com.tivconsultancy.tivGUI.startup;
 
+import com.tivconsultancy.opentiv.datamodels.DatabaseRAM;
 import com.tivconsultancy.opentiv.datamodels.IndexableResults;
+import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D;
@@ -38,7 +40,7 @@ public class StartUpController extends BasicController {
     }
 
     private void initDatabase() {
-        data = new Database();
+        data = new DatabaseRAM();
     }
 
     private void initSubControllers() {

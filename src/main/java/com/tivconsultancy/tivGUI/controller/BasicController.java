@@ -6,7 +6,8 @@
 
 package com.tivconsultancy.tivGUI.controller;
 
-import com.tivconsultancy.opentiv.datamodels.IndexedResults;
+import com.tivconsultancy.opentiv.datamodels.Database;
+import com.tivconsultancy.opentiv.datamodels.IndexDatabase;
 import com.tivconsultancy.opentiv.helpfunctions.settings.SettingObject;
 import com.tivconsultancy.opentiv.helpfunctions.settings.Settings;
 import com.tivconsultancy.opentiv.helpfunctions.settings.SettingsCluster;
@@ -14,7 +15,8 @@ import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import com.tivconsultancy.tivGUI.MainFrame;
 import com.tivconsultancy.tivGUI.StaticReferences;
-import com.tivconsultancy.tivGUI.startup.Database;
+import com.tivconsultancy.opentiv.datamodels.DatabaseRAM;
+import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -80,7 +82,7 @@ public abstract class BasicController implements ControllerUI{
     }
 
     @Override
-    public IndexedResults getOverTimeResults() {
+    public IndexDatabase getOverTimeResults() {
         return data.getIndexedResults();
     }
 
@@ -153,7 +155,7 @@ public abstract class BasicController implements ControllerUI{
     public void setGUI(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         try {
-            data.getIndexedResults().addObjectToRefresh(mainFrame.getPlotArea());
+            data.addObjectToRefresh(mainFrame.getPlotArea());
         } catch (Exception e) {
             StaticReferences.getlog().log(Level.SEVERE, "Cannot connect Plot Area to database", new Throwable(this.getClass().toString()));
         }
@@ -179,6 +181,10 @@ public abstract class BasicController implements ControllerUI{
             ls.add(o.toString());
         }
         return ls;
+    }
+    
+    public void addObjectToRefresh(Refreshable ref) {
+        data.addObjectToRefresh(ref);
     }
     
 }

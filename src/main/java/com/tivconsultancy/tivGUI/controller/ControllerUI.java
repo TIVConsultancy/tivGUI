@@ -5,6 +5,7 @@
  */
 package com.tivconsultancy.tivGUI.controller;
 
+import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.opentiv.highlevel.controller.Controller;
 import com.tivconsultancy.opentiv.datamodels.Result1D;
 import com.tivconsultancy.tivGUI.MainFrame;
@@ -20,6 +21,7 @@ public interface ControllerUI extends Controller {
     public void setScene(Scene s);
     public void setGUI(MainFrame mainFrame);
     
+    public void addObjectToRefresh(Refreshable ref);
 
     public Window getMainWindows();
     public MainFrame getMainFrame();    
