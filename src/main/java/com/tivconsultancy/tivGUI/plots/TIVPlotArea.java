@@ -6,6 +6,7 @@
 package com.tivconsultancy.tivGUI.plots;
 
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
+import com.tivconsultancy.opentiv.datamodels.Results1DPlotAble;
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
 import com.tivconsultancy.tivGUI.StaticReferences;
@@ -125,10 +126,10 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
             Series xy = new Series();
             xy.setName(s);
             clickedSeries.set(s, xy);
-            for (int i = 0; i < StaticReferences.controller.getOverTimeResults().getSize(); i++) {
+            for (int i = 0; i < StaticReferences.controller.getPlotAbleOverTimeResults().getIndexedResults().getSize(); i++) {
                 try {
-                    Double value = StaticReferences.controller.getOverTimeResults().getIndexBased(i, s);
-                    Integer index = StaticReferences.controller.getOverTimeResults().getEntry(i);
+                    Integer index = StaticReferences.controller.getPlotAbleOverTimeResults().getIndexedResults().getEntry(i);
+                    Double value = ((Results1DPlotAble) StaticReferences.controller.getPlotAbleOverTimeResults().getRes(index)).getRes(s);                    
                     xy.getData().add(new XYChart.Data(index, value));
                 } catch (Exception e) {
                     StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);

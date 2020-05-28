@@ -6,8 +6,8 @@
 
 package com.tivconsultancy.tivGUI.controller;
 
-import com.tivconsultancy.opentiv.datamodels.Database;
-import com.tivconsultancy.opentiv.datamodels.IndexDatabase;
+import com.tivconsultancy.opentiv.datamodels.overtime.Database;
+import com.tivconsultancy.opentiv.datamodels.overtime.IndexDatabase;
 import com.tivconsultancy.opentiv.helpfunctions.settings.SettingObject;
 import com.tivconsultancy.opentiv.helpfunctions.settings.Settings;
 import com.tivconsultancy.opentiv.helpfunctions.settings.SettingsCluster;
@@ -15,7 +15,7 @@ import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import com.tivconsultancy.tivGUI.MainFrame;
 import com.tivconsultancy.tivGUI.StaticReferences;
-import com.tivconsultancy.opentiv.datamodels.DatabaseRAM;
+import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,8 +82,8 @@ public abstract class BasicController implements ControllerUI{
     }
 
     @Override
-    public IndexDatabase getOverTimeResults() {
-        return data.getIndexedResults();
+    public Database getPlotAbleOverTimeResults() {
+        return null;
     }
 
     @Override
@@ -155,7 +155,7 @@ public abstract class BasicController implements ControllerUI{
     public void setGUI(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         try {
-            data.addObjectToRefresh(mainFrame.getPlotArea());
+//            data.addObjectToRefresh(mainFrame.getPlotArea());
         } catch (Exception e) {
             StaticReferences.getlog().log(Level.SEVERE, "Cannot connect Plot Area to database", new Throwable(this.getClass().toString()));
         }
@@ -183,8 +183,10 @@ public abstract class BasicController implements ControllerUI{
         return ls;
     }
     
+    @Override
     public void addObjectToRefresh(Refreshable ref) {
-        data.addObjectToRefresh(ref);
+//        data.addObjectToRefresh(ref);
+        getPlotAbleOverTimeResults().addObjectToRefresh(ref);
     }
     
 }

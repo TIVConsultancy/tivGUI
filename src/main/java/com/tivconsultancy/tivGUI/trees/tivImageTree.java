@@ -25,7 +25,7 @@ public class tivImageTree extends TreeView {
 
     public tivImageTree() {
         super(new TreeItem<>("Input Files"));
-
+        
         this.getRoot().getChildren().add(new TreeItem<>(new ImagePath("")));
         setStyle("imageTree");
         this.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -34,7 +34,7 @@ public class tivImageTree extends TreeView {
                 try {
                     StaticReferences.controller.setSelectedFile(((TreeItemFile) newValue).getFile());
                 } catch (Exception e) {
-                    StaticReferences.getlog().log(Level.INFO, "Unknown File type");
+                    StaticReferences.getlog().log(Level.INFO, "Cannot view or set file", e);
                 }                
             }
         });

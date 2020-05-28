@@ -214,5 +214,13 @@ public class MainFrame extends GridPane {
     public File getSelectedFile() {
         return ((tivImageTree.TreeItemFile) tabPane.imageTree.getSelectionModel().getSelectedItem()).getFile();
     }
+    
+    public void deactivateImageTree(){
+        tabPane.imageTree.setDisable(true);        
+    }
+    
+    public void activateImageTree(){
+        tabPane.imageTree.setDisable(false);        
+    }
 
 }

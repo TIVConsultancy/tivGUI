@@ -5,8 +5,8 @@
  */
 package com.tivconsultancy.tivGUI.startup;
 
-import com.tivconsultancy.opentiv.datamodels.DatabaseRAM;
-import com.tivconsultancy.opentiv.datamodels.IndexableResults;
+import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
+import com.tivconsultancy.opentiv.datamodels.overtime.IndexableResults;
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
