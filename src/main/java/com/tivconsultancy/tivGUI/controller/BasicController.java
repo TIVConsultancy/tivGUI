@@ -7,16 +7,14 @@
 package com.tivconsultancy.tivGUI.controller;
 
 import com.tivconsultancy.opentiv.datamodels.overtime.Database;
-import com.tivconsultancy.opentiv.datamodels.overtime.IndexDatabase;
 import com.tivconsultancy.opentiv.helpfunctions.settings.SettingObject;
 import com.tivconsultancy.opentiv.helpfunctions.settings.Settings;
-import com.tivconsultancy.opentiv.helpfunctions.settings.SettingsCluster;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import com.tivconsultancy.tivGUI.MainFrame;
 import com.tivconsultancy.tivGUI.StaticReferences;
-import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
+import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

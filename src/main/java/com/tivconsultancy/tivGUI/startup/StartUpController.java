@@ -6,7 +6,6 @@
 package com.tivconsultancy.tivGUI.startup;
 
 import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
-import com.tivconsultancy.opentiv.datamodels.overtime.IndexableResults;
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
@@ -21,6 +20,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.tivconsultancy.opentiv.datamodels.overtime.DataBaseEntry;
+import com.tivconsultancy.opentiv.datamodels.overtime.Database;
 
 /**
  *
@@ -79,7 +80,7 @@ public class StartUpController extends BasicController {
             public void run() {
                 try {
                     getCurrentMethod().run();
-                    data.setRes(currentStep, (IndexableResults) get1DResults());
+                    data.setRes(currentStep+"", (DataBaseEntry) get1DResults());
                     subViews.update();
                 } catch (Exception ex) {
                     StaticReferences.getlog().log(Level.SEVERE, "Unable to run : " + ex.getMessage(), ex);
@@ -97,7 +98,7 @@ public class StartUpController extends BasicController {
                 for (int i = 0; i < 10; i++) {
                     try {
                         getCurrentMethod().run();
-                        data.setRes(i, (IndexableResults) get1DResults());
+                        data.setRes(i+"", (DataBaseEntry) get1DResults());
                         subViews.update();
                     } catch (Exception ex) {
                         StaticReferences.getlog().log(Level.SEVERE, "Unable to run : " + ex.getMessage(), ex);
@@ -139,9 +140,13 @@ public class StartUpController extends BasicController {
         return results1D;
     }
 
+    private int getSelecedIndex() {
+        return 0;
+    }
+    
     @Override
     public void startNewIndexStep() {
-        results1D = new Result1D();
+        results1D = new Result1D(getSelecedIndex());
         for (Protocol pro : getCurrentMethod().getProtocols()) {
             for (NameSpaceProtocolResults1D e : pro.get1DResultsNames()) {
                 results1D.addResult(e.toString(), Double.NaN);
@@ -152,6 +157,11 @@ public class StartUpController extends BasicController {
         } catch (InterruptedException ex) {
             Logger.getLogger(StartUpMethod.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Database getDataBase() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
