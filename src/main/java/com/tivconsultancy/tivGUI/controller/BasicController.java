@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tivconsultancy.tivGUI.controller;
 
 import com.tivconsultancy.opentiv.datamodels.overtime.Database;
@@ -32,13 +31,14 @@ import javafx.stage.Window;
  *
  * @author TZ ThomasZiegenhein@TIVConsultancy.com +1 480 494 7254
  */
-public abstract class BasicController implements ControllerUI{
-    
+public abstract class BasicController implements ControllerUI {
+
     protected Method currentMethod;
     protected subControllerViews subViews;
     protected subControllerPlots subPlots;
     protected subControllerMenu subMenu;
     protected subControllerLogging subLog;
+    protected subControllerSQL subSQL;
 
     protected Settings hints;
     protected List<String> excludeHints;
@@ -48,9 +48,9 @@ public abstract class BasicController implements ControllerUI{
     protected Scene scene;
 
     protected Database data;
-    
+
     protected File selectedFile = null;
-    
+
     protected void createHints(Method newMethod) {
         hints = new Settings() {
             @Override
@@ -63,12 +63,16 @@ public abstract class BasicController implements ControllerUI{
             }
         };
         for (Protocol p : newMethod.getProtocols()) {
-            for(SettingObject o : p.getHints()){
+            for (SettingObject o : p.getHints()) {
                 hints.addSettingsObject(o);
-            }        
+            }
         }
     }
     
+    public Settings getHintsSettings(){
+        return hints;
+    }
+
     @Override
     public Method getCurrentMethod() {
         return currentMethod;
@@ -93,13 +97,18 @@ public abstract class BasicController implements ControllerUI{
     public subControllerMenu getMenuController(String ident) {
         return subMenu;
     }
+    
+    @Override
+    public subControllerSQL getSQLControler(String ident) {
+        return subSQL;
+    }
 
     @Override
     public Window getMainWindows() {
         return main;
     }
-    
-    public MainFrame getMainFrame(){
+
+    public MainFrame getMainFrame() {
         return mainFrame;
     }
 
@@ -113,7 +122,7 @@ public abstract class BasicController implements ControllerUI{
     public subControllerLogging getLogController(String ident) {
         return subLog;
     }
-    
+
     @Override
     public void importSettings(File loadFile) {
         List<SettingObject> loSettings = new ArrayList<>();
@@ -134,6 +143,11 @@ public abstract class BasicController implements ControllerUI{
         }
         mainFrame.startNewSettings();
     }
+    
+    @Override
+    public void refreshSettings(){
+        mainFrame.startNewSettings();
+    }
 
     @Override
     public void exportSettings(File saveFile) {
@@ -148,7 +162,7 @@ public abstract class BasicController implements ControllerUI{
             StaticReferences.getlog().log(Level.SEVERE, "Cannot save settings", ioe);
         }
     }
-    
+
     @Override
     public void setGUI(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -157,9 +171,9 @@ public abstract class BasicController implements ControllerUI{
         } catch (Exception e) {
             StaticReferences.getlog().log(Level.SEVERE, "Cannot connect Plot Area to database", new Throwable(this.getClass().toString()));
         }
-        
+
     }
-    
+
     @Override
     public File getCurrentFileSelected() {
         if (selectedFile == null) {
@@ -167,9 +181,9 @@ public abstract class BasicController implements ControllerUI{
         }
         return selectedFile;
     }
-    
+
     @Override
-    public List<String> getHints(String s) {        
+    public List<String> getHints(String s) {
         if (hints == null || (excludeHints != null && excludeHints.contains(s))) {
             return new ArrayList<>();
         }
@@ -180,11 +194,14 @@ public abstract class BasicController implements ControllerUI{
         }
         return ls;
     }
-    
+
     @Override
     public void addObjectToRefresh(Refreshable ref) {
 //        data.addObjectToRefresh(ref);
-        getPlotAbleOverTimeResults().addObjectToRefresh(ref);
+        if (getPlotAbleOverTimeResults() != null) {
+            getPlotAbleOverTimeResults().addObjectToRefresh(ref);
+        }
+
     }
-    
+
 }

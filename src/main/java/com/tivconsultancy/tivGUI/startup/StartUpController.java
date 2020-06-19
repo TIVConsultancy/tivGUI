@@ -49,6 +49,7 @@ public class StartUpController extends BasicController {
         subPlots = new StartUpSubControllerPlots();
         subMenu = new StartUpSubControllerMenu();
         subLog = new StartUpSubControllerLog();
+        subSQL = new StartUpSubControllerSQL();
     }
 
     @Override

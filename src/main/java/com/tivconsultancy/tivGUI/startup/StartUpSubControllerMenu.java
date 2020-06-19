@@ -7,15 +7,27 @@ package com.tivconsultancy.tivGUI.startup;
 
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
+import com.tivconsultancy.tivGUI.DialogSQL;
 import com.tivconsultancy.tivGUI.StaticReferences;
+import com.tivconsultancy.tivGUI.TIVScene;
 import com.tivconsultancy.tivGUI.controller.subControllerMenu;
+import com.tivconsultancy.tivGUI.controller.subControllerSQL;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  *
@@ -40,21 +52,26 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         mainMenu = new ArrayList<>();
         mainMenu.add(dictionary(MainItems.Session));
         mainMenu.add(dictionary(MainItems.Run));
+        mainMenu.add(dictionary(MainItems.Data));
     }
 
     private void initMainEntries() {
         subMenuEntries = new LookUp<>();
-        List<String> SessionEntries = new ArrayList<>();
-        SessionEntries.add(dictionary(MenuEntries.New));
-        SessionEntries.add(dictionary(MenuEntries.Load));
-        SessionEntries.add(dictionary(MenuEntries.ImportSettings));
-        SessionEntries.add(dictionary(MenuEntries.ExportSettings));
-        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Session), SessionEntries));
+        List<String> sessionEntries = new ArrayList<>();
+        sessionEntries.add(dictionary(MenuEntries.New));
+        sessionEntries.add(dictionary(MenuEntries.Load));
+        sessionEntries.add(dictionary(MenuEntries.ImportSettings));
+        sessionEntries.add(dictionary(MenuEntries.ExportSettings));
+        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Session), sessionEntries));
 
-        List<String> RunEntries = new ArrayList<>();
-        RunEntries.add(dictionary(MenuEntries.OneStep));
-        RunEntries.add(dictionary(MenuEntries.RunAll));
-        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Run), RunEntries));
+        List<String> runEntries = new ArrayList<>();
+        runEntries.add(dictionary(MenuEntries.OneStep));
+        runEntries.add(dictionary(MenuEntries.RunAll));
+        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Run), runEntries));
+
+        List<String> dataEntries = new ArrayList<>();
+        dataEntries.add(dictionary(MenuEntries.SQL));
+        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Data), dataEntries));
 
     }
 
@@ -67,6 +84,8 @@ public class StartUpSubControllerMenu implements subControllerMenu {
 
         icons.add(new NameObject<>(dictionary(MenuEntries.OneStep), StaticReferences.standardIcons.get("walking.png")));
         icons.add(new NameObject<>(dictionary(MenuEntries.RunAll), StaticReferences.standardIcons.get("runningMult.png")));
+
+        icons.add(new NameObject<>(dictionary(MenuEntries.SQL), StaticReferences.standardIcons.get("sql.png")));
     }
 
     private void initActionEvents() {
@@ -74,63 +93,77 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         EventHandler<ActionEvent> newSession = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();                
+                FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Start New Session");
                 File selectedFile = fileChooser.showOpenDialog(StaticReferences.controller.getMainWindows());
                 StaticReferences.controller.startNewSession(selectedFile);
             }
         };
-        
+
         EventHandler<ActionEvent> loadSession = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();                
+                FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Load Session");
                 File selectedFile = fileChooser.showOpenDialog(StaticReferences.controller.getMainWindows());
                 StaticReferences.controller.loadSession(selectedFile);
             }
         };
-        
+
         EventHandler<ActionEvent> importSettings = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();                
+                FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Import Settings");
                 File selectedFile = fileChooser.showOpenDialog(StaticReferences.controller.getMainWindows());
                 StaticReferences.controller.importSettings(selectedFile);
             }
         };
-        
+
         EventHandler<ActionEvent> exportSettings = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();                
+                FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Export Settings");
                 File selectedFile = fileChooser.showSaveDialog(StaticReferences.controller.getMainWindows());
                 StaticReferences.controller.exportSettings(selectedFile);
             }
         };
-        
+
         EventHandler<ActionEvent> runOneStep = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 StaticReferences.controller.runCurrentStep();
             }
         };
-        
+
         EventHandler<ActionEvent> runAll = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 StaticReferences.controller.run();
             }
-        };  
-        
+        };
+
+        EventHandler<ActionEvent> sql = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+
+                Optional<Map<Enum, String>> retrunSQLDialog = (new DialogSQL()).showAndWait();
+                retrunSQLDialog.ifPresent(Map -> {
+                    subControllerSQL controllerSQL = StaticReferences.controller.getSQLControler(null);
+                    controllerSQL.connect(Map.get(DialogSQL.fieldNames.user), Map.get(DialogSQL.fieldNames.password), Map.get(DialogSQL.fieldNames.database), Map.get(DialogSQL.fieldNames.hostname));
+                });
+
+            }
+        };
+
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.New), newSession));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.Load), loadSession));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.ImportSettings), importSettings));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.ExportSettings), exportSettings));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.OneStep), runOneStep));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.RunAll), runAll));
+        actionEvents.add(new NameObject<>(dictionary(MenuEntries.SQL), sql));
     }
 
     /**
@@ -166,11 +199,11 @@ public class StartUpSubControllerMenu implements subControllerMenu {
     }
 
     private enum MainItems {
-        Session, Run
+        Session, Run, Data
     }
 
     private enum MenuEntries {
-        New, Load, OneStep, RunAll, ImportSettings, ExportSettings
+        New, Load, OneStep, RunAll, ImportSettings, ExportSettings, SQL
     }
 
     private String dictionary(Enum e) {
@@ -186,6 +219,10 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         if (e == MenuEntries.RunAll) {
             return "All";
         }
+        if (e == MenuEntries.SQL) {
+            return "SQL";
+        }
+
         return e.toString();
     }
 

@@ -35,7 +35,7 @@ public class TreeContentClass {
         hints = StaticReferences.controller.getHints(name);
         if (hints.isEmpty()) {
             this.dummyEntry = true;
-            this.shortDescription = "fixed";
+            this.shortDescription = contentStatus.fixed.toString();
         } else {
             this.dummyEntry = false;
             this.shortDescription = "";
@@ -51,7 +51,7 @@ public class TreeContentClass {
         this.dummyEntry = dummyEntry;
         if (dummyEntry) {
             hints = new ArrayList<>();
-            this.shortDescription = "fixed";
+            this.shortDescription = contentStatus.fixed.toString();
         } else {
             hints = StaticReferences.controller.getHints(name);
             this.shortDescription = "";
@@ -108,6 +108,16 @@ public class TreeContentClass {
     public List<String> getHints(){
         return hints;
     }
+    
+    public void updateHints(){
+        if (dummyEntry) {
+//            hints = new ArrayList<>();
+//            this.shortDescription = contentStatus.fixed.toString();
+        } else {
+            hints = StaticReferences.controller.getHints(name);
+            this.shortDescription = "";
+        }
+    }        
 
     @Override
     public String toString() {
@@ -124,5 +134,9 @@ public class TreeContentClass {
         if(getContent() instanceof SettingObject){
             ((SettingObject) getContent()).setValue(text);
         }
+    }
+    
+    private enum contentStatus{
+        fixed
     }
 }

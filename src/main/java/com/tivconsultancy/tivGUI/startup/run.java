@@ -49,7 +49,7 @@ public class run extends Application {
         MainFrame.setIcons(new StartUpController().getClass(), icons);
         
         StaticReferences.controller = new StartUpController();        
-        MainFrame tivGUI = new MainFrame();        
+        MainFrame tivGUI = new MainFrame();
         TIVScene scene = new TIVScene(tivGUI);
         StaticReferences.controller.setScene(scene);
         JMetro jMetro = new JMetro(Style.DARK);
@@ -70,7 +70,7 @@ public class run extends Application {
 //        StaticReferences.getlog().log(Level.SEVERE, "sfsdfsdfsdf");
 //        Windowhandler.log(Level.SEVERE, "sfsdf", new Throwable());
 //        StaticReferences.controller.getCurrentMethod().run();
-            new TempOnDisk(null);
+//            new TempOnDisk(null);
     }
     
 }

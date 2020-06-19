@@ -30,5 +30,8 @@ public interface ControllerUI extends Controller {
     public subControllerPlots getViewControllerPlots(String ident);
     public subControllerMenu getMenuController(String ident);
     public subControllerLogging getLogController(String ident);
+    public subControllerSQL getSQLControler(String ident);
+    
+    public void refreshSettings();
 
 }
