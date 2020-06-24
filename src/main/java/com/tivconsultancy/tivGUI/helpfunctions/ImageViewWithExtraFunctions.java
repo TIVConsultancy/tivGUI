@@ -10,6 +10,8 @@ import com.sun.javafx.sg.prism.NGNode;
 import com.sun.prism.Graphics;
 import com.sun.prism.Texture;
 import com.sun.prism.impl.BaseResourceFactory;
+import com.tivconsultancy.tivGUI.StaticReferences;
+import com.tivconsultancy.tivGUI.controller.ControllerWithImageInteraction;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
@@ -35,13 +37,17 @@ public class ImageViewWithExtraFunctions extends ImageView {
     boolean pixelZoom = true;
 
     int MIN_PIXELS = 10;
+    
+    public final String ident;
 
     public ImageViewWithExtraFunctions(){
         super();
+        ident = "unknown";
     }
     
-    public ImageViewWithExtraFunctions(Image img){
+    public ImageViewWithExtraFunctions(Image img, String ident){
         super(img);
+        this.ident = ident;
         initEvents();
         setZoomEvents();
         setViewport(new Rectangle2D(0, 0, img.getWidth(), img.getHeight()));        
@@ -103,6 +109,9 @@ public class ImageViewWithExtraFunctions extends ImageView {
             @Override
             public void handle(MouseEvent e) {
                 Point2D mousePress = getImageCoordinates(o, new Point2D(e.getX(), e.getY()));
+                if(StaticReferences.controller instanceof ControllerWithImageInteraction){
+                    ((ControllerWithImageInteraction) StaticReferences.controller).clickOnImage((int) mousePress.getY(), (int) mousePress.getX(), e, ident);
+                }
                 mouseDown.set(mousePress);
             }
         };

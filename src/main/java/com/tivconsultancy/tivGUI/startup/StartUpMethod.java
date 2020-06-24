@@ -12,16 +12,12 @@ import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_PreProcessor;
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_ReadIMGFiles;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
-import com.tivconsultancy.opentiv.datamodels.Result1D;
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -57,7 +53,6 @@ public class StartUpMethod implements Method {
 //            Logger.getLogger(StartUpMethod.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-
     @Override
     public List<ImagePath> getInputImages() {
         return new ArrayList<>();
@@ -66,7 +61,7 @@ public class StartUpMethod implements Method {
     @Override
     public List<Protocol> getProtocols() {
         return methods.getValues();
-    }    
+    }
 
     @Override
     public void readInFileForView(File f) throws Exception {
@@ -110,5 +105,13 @@ public class StartUpMethod implements Method {
     @Override
     public Protocol getProtocol(String ident) {
         return methods.get(ident);
+    }
+
+    @Override
+    public void runParts(String ident) throws Exception {
+        if (ident.equals("preproc")) {
+            getProtocol("read").run(currentFile);
+            getProtocol("preproc").run(getProtocol("read").getResults());
+        }
     }
 }

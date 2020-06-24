@@ -7,25 +7,21 @@ package com.tivconsultancy.tivGUI.startup;
 
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
-import com.tivconsultancy.tivGUI.DialogSQL;
+import com.tivconsultancy.tivGUI.Dialogs.Data.DialogSQL;
+import com.tivconsultancy.tivGUI.Dialogs.Tools.DialogCutImage;
 import com.tivconsultancy.tivGUI.StaticReferences;
-import com.tivconsultancy.tivGUI.TIVScene;
+import com.tivconsultancy.tivGUI.controller.ControllerUI;
 import com.tivconsultancy.tivGUI.controller.subControllerMenu;
 import com.tivconsultancy.tivGUI.controller.subControllerSQL;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Dialog;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -50,9 +46,9 @@ public class StartUpSubControllerMenu implements subControllerMenu {
 
     private void initMainItems() {
         mainMenu = new ArrayList<>();
-        mainMenu.add(dictionary(MainItems.Session));
-        mainMenu.add(dictionary(MainItems.Run));
-        mainMenu.add(dictionary(MainItems.Data));
+        for (Enum e : MainItems.values()) {
+            mainMenu.add(dictionary(e));
+        }
     }
 
     private void initMainEntries() {
@@ -73,6 +69,10 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         dataEntries.add(dictionary(MenuEntries.SQL));
         subMenuEntries.add(new NameObject<>(dictionary(MainItems.Data), dataEntries));
 
+        List<String> toolsEntries = new ArrayList<>();
+        toolsEntries.add(dictionary(MenuEntries.CutImage));
+        subMenuEntries.add(new NameObject<>(dictionary(MainItems.Tools), toolsEntries));
+
     }
 
     private void initIcons() {
@@ -86,6 +86,8 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         icons.add(new NameObject<>(dictionary(MenuEntries.RunAll), StaticReferences.standardIcons.get("runningMult.png")));
 
         icons.add(new NameObject<>(dictionary(MenuEntries.SQL), StaticReferences.standardIcons.get("sql.png")));
+
+        icons.add(new NameObject<>(dictionary(MenuEntries.CutImage), StaticReferences.standardIcons.get("scissors.png")));
     }
 
     private void initActionEvents() {
@@ -148,12 +150,24 @@ public class StartUpSubControllerMenu implements subControllerMenu {
             @Override
             public void handle(ActionEvent t) {
 
-                Optional<Map<Enum, String>> retrunSQLDialog = (new DialogSQL()).showAndWait();
+                Dialog dialSQL = new DialogSQL();
+                StaticReferences.controller.setDialog(ControllerUI.DialogNames_Default.SQL, dialSQL);
+                Optional<Map<Enum, String>> retrunSQLDialog = dialSQL.showAndWait();
                 retrunSQLDialog.ifPresent(Map -> {
                     subControllerSQL controllerSQL = StaticReferences.controller.getSQLControler(null);
                     controllerSQL.connect(Map.get(DialogSQL.fieldNames.user), Map.get(DialogSQL.fieldNames.password), Map.get(DialogSQL.fieldNames.database), Map.get(DialogSQL.fieldNames.hostname));
                 });
 
+            }
+        };
+
+        EventHandler<ActionEvent> imageTools_Cut = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+
+                Dialog dialogCutImage = new DialogCutImage();
+                StaticReferences.controller.setDialog(ControllerUI.DialogNames_Default.CUT, dialogCutImage);
+                dialogCutImage.show();
             }
         };
 
@@ -164,6 +178,7 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.OneStep), runOneStep));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.RunAll), runAll));
         actionEvents.add(new NameObject<>(dictionary(MenuEntries.SQL), sql));
+        actionEvents.add(new NameObject<>(dictionary(MenuEntries.CutImage), imageTools_Cut));
     }
 
     /**
@@ -199,11 +214,11 @@ public class StartUpSubControllerMenu implements subControllerMenu {
     }
 
     private enum MainItems {
-        Session, Run, Data
+        Session, Run, Data, Tools
     }
 
     private enum MenuEntries {
-        New, Load, OneStep, RunAll, ImportSettings, ExportSettings, SQL
+        New, Load, OneStep, RunAll, ImportSettings, ExportSettings, SQL, CutImage
     }
 
     private String dictionary(Enum e) {
@@ -221,6 +236,9 @@ public class StartUpSubControllerMenu implements subControllerMenu {
         }
         if (e == MenuEntries.SQL) {
             return "SQL";
+        }
+        if (e == MenuEntries.CutImage) {
+            return "Cut Image";
         }
 
         return e.toString();

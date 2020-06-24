@@ -31,7 +31,7 @@ import javafx.stage.Window;
  *
  * @author TZ ThomasZiegenhein@TIVConsultancy.com +1 480 494 7254
  */
-public abstract class BasicController implements ControllerUI {
+public abstract class BasicController implements ControllerWithImageInteraction, ThreadControl {
 
     protected Method currentMethod;
     protected subControllerViews subViews;
@@ -39,6 +39,7 @@ public abstract class BasicController implements ControllerUI {
     protected subControllerMenu subMenu;
     protected subControllerLogging subLog;
     protected subControllerSQL subSQL;
+    protected subControllerImageTools subImageTools;
 
     protected Settings hints;
     protected List<String> excludeHints;
@@ -101,6 +102,11 @@ public abstract class BasicController implements ControllerUI {
     @Override
     public subControllerSQL getSQLControler(String ident) {
         return subSQL;
+    }
+    
+    @Override
+    public subControllerImageTools getsubControllerImageTools(String ident) {
+        return subImageTools;
     }
 
     @Override
@@ -201,7 +207,20 @@ public abstract class BasicController implements ControllerUI {
         if (getPlotAbleOverTimeResults() != null) {
             getPlotAbleOverTimeResults().addObjectToRefresh(ref);
         }
-
+    }
+    
+    public Thread getRunningThread(){
+        return new Thread("empty");
+    }
+    
+    public void setRunningThread(Thread running){
+    }
+    
+    public void blockUIForProceess(){
+        
+    }
+    public void releaseUIAfterProceess(){
+        
     }
 
 }

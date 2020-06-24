@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tivconsultancy.tivGUI;
+package com.tivconsultancy.tivGUI.Dialogs.Data;
 
 
 import java.util.HashMap;
@@ -36,12 +36,12 @@ public class DialogSQL extends Dialog<Map<Enum, String>> {
   private TextField databaseName;
   private TextField userName;
   private PasswordField passwordField;
+  private ButtonType connectButton = new ButtonType("Connect", ButtonData.OK_DONE);
 
   public DialogSQL() {
     setTitle("SQl Connection");
     setHeaderText("Connection to SQL Database");
 
-    ButtonType connectButton = new ButtonType("Connect", ButtonData.OK_DONE);
     getDialogPane().getButtonTypes().addAll(connectButton, ButtonType.CANCEL);
 
     Label hostNameL = new Label("Host: ");

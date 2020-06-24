@@ -27,7 +27,7 @@ public class ViewContainerImagesFit extends ViewerContainer {
 
     public ViewContainerImagesFit(BufferedImage img, String name) {
         this.name = name;
-        toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(img, null));
+        toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(img, null), name);
         anchored = new AnchorPane(toView);
         AnchorPane.setTopAnchor(toView, 0.0);
         AnchorPane.setRightAnchor(toView, 0.0);
@@ -42,9 +42,9 @@ public class ViewContainerImagesFit extends ViewerContainer {
     public ViewContainerImagesFit(ImageInt img, String name) {
         this.name = name;
         if(img == null || img.getBuffImage() == null){
-            toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(new ImageInt(50, 50, 0).getBuffImage(), null));
+            toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(new ImageInt(50, 50, 0).getBuffImage(), null), name);
         }else{
-            toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(img.getBuffImage(), null));
+            toView = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage(img.getBuffImage(), null), name);
         }
         
         anchored = new AnchorPane(toView);

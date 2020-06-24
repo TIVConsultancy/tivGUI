@@ -10,6 +10,7 @@ import com.tivconsultancy.opentiv.highlevel.controller.Controller;
 import com.tivconsultancy.opentiv.datamodels.Result1D;
 import com.tivconsultancy.tivGUI.MainFrame;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialog;
 import javafx.stage.Window;
 
 /**
@@ -33,5 +34,17 @@ public interface ControllerUI extends Controller {
     public subControllerSQL getSQLControler(String ident);
     
     public void refreshSettings();
+    
+    public Dialog getDialog(Enum ident);
+    public void setDialog(Enum ident, Dialog dialogBox);
+    
+    public void blockUIForProceess();
+    public void releaseUIAfterProceess();
+    
+    public static enum DialogNames_Default{
+        SQL, CUT, PROCESS
+    }
+            
+            
 
 }

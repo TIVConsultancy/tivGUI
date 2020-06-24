@@ -22,6 +22,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.tivconsultancy.opentiv.datamodels.overtime.DataBaseEntry;
 import com.tivconsultancy.opentiv.datamodels.overtime.Database;
+import com.tivconsultancy.tivGUI.controller.subControllerImageTools;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.scene.control.Dialog;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -29,6 +35,8 @@ import com.tivconsultancy.opentiv.datamodels.overtime.Database;
  */
 public class StartUpController extends BasicController {
 
+    
+    Map<String, Dialog> openDialogBoxes = new HashMap<>();
     protected Result1D results1D;
 
     public StartUpController() {
@@ -50,6 +58,8 @@ public class StartUpController extends BasicController {
         subMenu = new StartUpSubControllerMenu();
         subLog = new StartUpSubControllerLog();
         subSQL = new StartUpSubControllerSQL();
+        subImageTools = new StartUpSubControllerImageTools();
+//        subImageTools = ne
     }
 
     @Override
@@ -163,6 +173,31 @@ public class StartUpController extends BasicController {
     @Override
     public Database getDataBase() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clickOnImage(int i, int j, MouseEvent evt, String ident) {
+        getsubControllerImageTools(null).clickOnImage(i, j, ident);
+    }
+
+    @Override
+    public void buttonPressed(KeyEvent evt, String ident) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public subControllerImageTools getsubControllerImageTools(String ident) {
+        return subImageTools;
+    }
+
+    @Override
+    public Dialog getDialog(Enum ident) {
+        return openDialogBoxes.get(ident.toString());
+    }
+
+    @Override
+    public void setDialog(Enum ident, Dialog dialogBox) {
+        openDialogBoxes.put(ident.toString(), dialogBox);
     }
 
 }

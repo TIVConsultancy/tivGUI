@@ -15,19 +15,12 @@
  */
 package com.tivconsultancy.tivGUI.controller;
 
-import com.tivconsultancy.opentiv.datamodels.SQL.PostgreSQL;
-import com.tivconsultancy.opentiv.datamodels.SQL.SQLDatabase;
-import java.util.List;
-
 /**
  *
  * @author Thomas Ziegenhein
  */
-public interface subControllerSQL {
+public interface ThreadControl {
+    public Thread getRunningThread();
     
-    
-    public SQLDatabase getDatabase(String ident);
-    public String connect(String user, String password, String database, String host);
-    public List<String> getColumnEntries(String schemaName, String tableName, String columnName);    
-    
+    public void setRunningThread(Thread running);
 }
