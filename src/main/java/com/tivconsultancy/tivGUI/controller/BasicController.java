@@ -48,9 +48,9 @@ public abstract class BasicController implements ControllerWithImageInteraction,
     protected MainFrame mainFrame;
     protected Scene scene;
 
-    protected Database data;
+    protected Database data = new DatabaseRAM();
 
-    protected File selectedFile = null;
+    protected File selectedFile = null;    
 
     protected void createHints(Method newMethod) {
         hints = new Settings() {
