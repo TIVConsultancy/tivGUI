@@ -1,3 +1,3 @@
 rootProject.name = 'tivGUI'
 include ":openTIV"
-project(":openTIV").projectDir = file("D:\\_Repos\\public\\tivconsultancy\\openTIV")
+project(":openTIV").projectDir = file("C:\\NoAdmin\\TIVRepo\\openTIV")

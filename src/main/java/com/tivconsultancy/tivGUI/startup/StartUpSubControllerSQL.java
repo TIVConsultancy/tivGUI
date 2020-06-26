@@ -54,4 +54,8 @@ public class StartUpSubControllerSQL implements subControllerSQL {
         return sqlData.getColumnEntries(schemaName, tableName, columnName);
     }
 
+    @Override
+    public void importCSVfile(String sDir) {
+        //To change body of generated methods, choose Tools | Templates.
+    }
 }
