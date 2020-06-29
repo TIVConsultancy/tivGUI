@@ -11,6 +11,7 @@ import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D;
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_PreProcessor;
 import com.tivconsultancy.opentiv.highlevel.protocols.Prot_ReadIMGFiles;
+import com.tivconsultancy.opentiv.highlevel.protocols.Prot_SystemSettings;
 import com.tivconsultancy.opentiv.highlevel.protocols.Protocol;
 import com.tivconsultancy.opentiv.math.specials.LookUp;
 import com.tivconsultancy.opentiv.math.specials.NameObject;
@@ -38,6 +39,7 @@ public class StartUpMethod implements Method {
         methods.add(new NameObject<>("startup", new StartUpProtocol()));
         methods.add(new NameObject<>("read", new Prot_ReadIMGFiles()));
         methods.add(new NameObject<>("preproc", new Prot_PreProcessor()));
+        methods.add(new NameObject<>("system", new Prot_SystemSettings()));
     }
 
 //    private void startNewIndexStep() {
@@ -113,5 +115,10 @@ public class StartUpMethod implements Method {
             getProtocol("read").run(currentFile);
             getProtocol("preproc").run(getProtocol("read").getResults());
         }
+    }
+
+    @Override
+    public Prot_SystemSettings getSystemSetting(String ident) {
+        return (Prot_SystemSettings) methods.get("system");
     }
 }
