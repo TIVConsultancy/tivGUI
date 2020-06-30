@@ -200,4 +200,9 @@ public class StartUpController extends BasicController {
         openDialogBoxes.put(ident.toString(), dialogBox);
     }
 
+    @Override
+    public void storeTempData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

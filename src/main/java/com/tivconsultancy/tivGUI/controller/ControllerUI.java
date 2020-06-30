@@ -41,6 +41,8 @@ public interface ControllerUI extends Controller {
     public void blockUIForProceess();
     public void releaseUIAfterProceess();
     
+    public void storeTempData();
+    
     public static enum DialogNames_Default{
         SQL, CUT, PROCESS
     }
