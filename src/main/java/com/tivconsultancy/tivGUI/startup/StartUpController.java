@@ -6,7 +6,6 @@
 package com.tivconsultancy.tivGUI.startup;
 
 import com.tivconsultancy.opentiv.datamodels.overtime.DatabaseRAM;
-import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.opentiv.highlevel.methods.Method;
 import com.tivconsultancy.opentiv.highlevel.protocols.NameSpaceProtocolResults1D;
@@ -84,7 +83,7 @@ public class StartUpController extends BasicController {
     }
 
     @Override
-    public void runCurrentStep() {
+    public void runCurrentStep(String ... options) {
         int currentStep = 0;
         new Thread() {
             @Override
@@ -101,7 +100,7 @@ public class StartUpController extends BasicController {
     }
 
     @Override
-    public void run() {
+    public void run(String ... options) {
         new Thread() {
             @Override
             public void run() {
@@ -121,7 +120,6 @@ public class StartUpController extends BasicController {
 
     @Override
     public List<File> getInputFiles(String name) {
-        System.out.println(System.getProperty("user.home") + File.separatorChar + "My Documents");
         File fFolder = new File(System.getProperty("user.home") + File.separatorChar + "Pictures");
 //        File fFolder = new File("D:\\ThomasBubsize\\Pos0\\3slpm\\_0");
         List<File> ReadInFile = new ArrayList<>();

@@ -26,11 +26,8 @@ import java.util.List;
 public interface subControllerSQL {
 
     public SQLDatabase getDatabase(String ident);
-
     public String connect(String user, String password, String database, String host);
-
     public List<String> getColumnEntries(String schemaName, String tableName, String columnName);
-
-    public void importCSVfile(String sDir);
+    public String getUser();
     
 }

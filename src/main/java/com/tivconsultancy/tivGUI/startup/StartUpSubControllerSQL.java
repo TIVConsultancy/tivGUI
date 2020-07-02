@@ -55,7 +55,7 @@ public class StartUpSubControllerSQL implements subControllerSQL {
     }
 
     @Override
-    public void importCSVfile(String sDir) {
-        //To change body of generated methods, choose Tools | Templates.
+    public String getUser() {
+        return sqlData.getUser();
     }
 }

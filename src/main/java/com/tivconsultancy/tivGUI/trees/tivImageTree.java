@@ -8,7 +8,6 @@ package com.tivconsultancy.tivGUI.trees;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import delete.com.tivconsultancy.opentiv.devgui.main.ImagePath;
 import java.io.File;
-import java.util.List;
 import java.util.logging.Level;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
