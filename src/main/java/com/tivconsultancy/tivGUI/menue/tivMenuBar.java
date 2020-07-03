@@ -7,10 +7,12 @@ package com.tivconsultancy.tivGUI.menue;
 
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.tivGUI.controller.subControllerMenu;
+import static com.tivconsultancy.tivGUI.menue.tivMenuBar.tivSpecialMenue.SEP;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.SeparatorMenuItem;
 
 /**
  *
@@ -20,7 +22,7 @@ public class tivMenuBar extends MenuBar {
 
     public tivMenuBar() {
 
-        subControllerMenu con = StaticReferences.controller.getMenuController(null);        
+        subControllerMenu con = StaticReferences.controller.getMenuController(null);
 
         for (String s : con.getMainItems()) {
             Menu m;
@@ -32,18 +34,27 @@ public class tivMenuBar extends MenuBar {
 
             for (String sub : con.getMenuEntries(s)) {
                 MenuItem mi;
-                if (con.getIcon(sub) != null) {
-                    mi = new MenuItem(sub, con.getIcon(sub));
+                if (sub.equals(SEP.toString())) {
+                    m.getItems().add(new SeparatorMenuItem());
                 } else {
-                    mi = new MenuItem(sub);
+                    if (con.getIcon(sub) != null) {
+                        mi = new MenuItem(sub, con.getIcon(sub));
+                    } else {
+                        mi = new MenuItem(sub);
+                    }
+                    m.getItems().add(mi);
+                    mi.setOnAction(con.getActionEvent(sub));
                 }
-                m.getItems().add(mi);
-                mi.setOnAction(con.getActionEvent(sub));
+
             }
 
             getMenus().add(m);
         }
 
+    }
+
+    public static enum tivSpecialMenue {
+        SEP
     }
 
 }
