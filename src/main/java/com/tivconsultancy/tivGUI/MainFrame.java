@@ -50,6 +50,7 @@ public class MainFrame extends GridPane {
 
     public static List<Image> iconsTIVGUIMainFrame;
     public static Image loadGif;
+    public static Image logo;
 
     ParentViewer dataView;
 
@@ -184,6 +185,17 @@ public class MainFrame extends GridPane {
         for (String s : source) {
             iconsTIVGUIMainFrame.add(new Image(o.getResourceAsStream(s)));
         }
+    }
+    
+    public static void setLogo(Class<?> o, String source) {
+        logo = new Image(o.getResourceAsStream(source));
+    }
+    
+    public static Image getLogo() {
+        if(logo == null){
+            return getIcon().get(0);
+        }
+        return logo;
     }
 
     public static void setLoadPicture(Class<?> o, String source) {

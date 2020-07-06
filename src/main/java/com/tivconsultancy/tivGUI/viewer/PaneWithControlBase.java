@@ -65,7 +65,7 @@ public class PaneWithControlBase extends ScrollPane {
 
     private void generateDefaultContent() {
         try {
-            defaultContent = new ImageViewWithExtraFunctions(MainFrame.getIcon().get(0), "icon");
+            defaultContent = new ImageViewWithExtraFunctions(MainFrame.getLogo(), "icon");
         } catch (Exception ex) {
             defaultContent = new ImageViewWithExtraFunctions(SwingFXUtils.toFXImage((new ImageInt(50, 50, 150)).getBuffImage(), null), "default");
             Logger.getLogger(PaneWithControlBase.class.getName()).log(Level.SEVERE, null, ex);
