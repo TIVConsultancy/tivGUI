@@ -5,11 +5,6 @@
  */
 package com.tivconsultancy.tivGUI.helpfunctions;
 
-import com.sun.javafx.sg.prism.NGImageView;
-import com.sun.javafx.sg.prism.NGNode;
-import com.sun.prism.Graphics;
-import com.sun.prism.Texture;
-import com.sun.prism.impl.BaseResourceFactory;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.tivGUI.controller.ControllerWithImageInteraction;
 import javafx.beans.property.ObjectProperty;
@@ -33,6 +28,9 @@ public class ImageViewWithExtraFunctions extends ImageView {
     EventHandler<MouseEvent> zoom_pressed;
 
     ObjectProperty<Point2D> mouseDown = new SimpleObjectProperty<>();
+    
+    protected boolean zoomDisabled = false;
+    protected boolean dragDsiabled = false;
     
     boolean pixelZoom = true;
 
@@ -68,6 +66,7 @@ public class ImageViewWithExtraFunctions extends ImageView {
         zoom_scroll = new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent e) {
+                if(zoomDisabled) return;
                 double width = getImage().getWidth();
                 double height = getImage().getHeight();
                 double delta = e.getDeltaY();
@@ -99,6 +98,7 @@ public class ImageViewWithExtraFunctions extends ImageView {
         zoom_drag = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
+                if(dragDsiabled) return;
                 Point2D dragPoint = getImageCoordinates(o, new Point2D(e.getX(), e.getY()));
                 shift(o, dragPoint.subtract(mouseDown.get()));
                 mouseDown.set(getImageCoordinates(o, new Point2D(e.getX(), e.getY())));
@@ -157,6 +157,14 @@ public class ImageViewWithExtraFunctions extends ImageView {
         return new Point2D(
                 viewport.getMinX() + xProportion * viewport.getWidth(),
                 viewport.getMinY() + yProportion * viewport.getHeight());
+    }
+    
+    public void disableZoom(){
+        this.zoomDisabled = true;
+    }
+    
+    public void disableDrag(){
+        this.dragDsiabled = true;
     }
     
 //    @Override 

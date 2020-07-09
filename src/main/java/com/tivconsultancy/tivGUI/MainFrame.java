@@ -52,7 +52,7 @@ public class MainFrame extends GridPane {
     public static Image loadGif;
     public static Image logo;
 
-    ParentViewer dataView;
+    protected AnchorPane dataView;
 
     public MainFrame() {
         initComponents();

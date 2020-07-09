@@ -61,6 +61,8 @@ public class ViewContainerImagesFit extends ViewerContainer {
         Image img = SwingFXUtils.toFXImage((BufferedImage) p[0], null);
         toView.setImage(SwingFXUtils.toFXImage((BufferedImage) p[0], null));
         toView.setViewport(new Rectangle2D(0, 0, img.getWidth(), img.getHeight()));
+//        anchored.setPrefWidth(img.getWidth());
+//        anchored.setPrefHeight(img.getHeight());
 //        toView.fitWidthProperty().setValue(img.getWidth());
 //        toView.fitHeightProperty().setValue(img.getHeight());
     }

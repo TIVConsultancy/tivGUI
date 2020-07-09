@@ -29,7 +29,7 @@ public class StartUpSubControllerViews implements subControllerViews {
 
     public StartUpSubControllerViews(ControllerUI main) {
         this.main = main;
-        buildLookUp();
+        buildLookUp();        
     }
 
     private void buildLookUp() {

@@ -17,19 +17,10 @@
 package com.tivconsultancy.tivGUI.Dialogs.Data;
 
 
-import java.util.HashMap;
 import java.util.Map;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class DialogNote extends Dialog<Map<Enum, String>> {
   private ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);

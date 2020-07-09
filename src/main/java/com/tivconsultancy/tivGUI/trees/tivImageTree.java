@@ -30,6 +30,10 @@ public class tivImageTree extends TreeView {
         this.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if(newValue == null || !(newValue instanceof TreeItemFile)){
+//                    StaticReferences.controller.setSelectedFile(null);
+                    return;
+                }
                 try {
                     StaticReferences.controller.setSelectedFile(((TreeItemFile) newValue).getFile());
                 } catch (Exception e) {
@@ -41,10 +45,15 @@ public class tivImageTree extends TreeView {
 
     public void startNewSession() {
         this.getRoot().getChildren().clear();
+        imageRoot.getChildren().clear();
         this.getRoot().getChildren().add(imageRoot);
         for (File f : StaticReferences.controller.getInputFiles(null)) {
             imageRoot.getChildren().add(new TreeItemFile(f));
         }
+        if(!this.getSelectionModel().isEmpty()){
+            this.getSelectionModel().select(0);        
+        }
+        StaticReferences.controller.getViewController(null).update();
     }
 
     public class TreeItemFile extends TreeItem {
