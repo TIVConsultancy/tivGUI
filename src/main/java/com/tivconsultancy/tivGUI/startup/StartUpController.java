@@ -133,7 +133,7 @@ public class StartUpController extends BasicController {
     }
 
     @Override
-    public void setSelectedFile(File f) {
+    public void setSelectedFile(File fOld, File f) {
         this.selectedFile = f;
         this.getCurrentMethod().setFiles(new File[]{f});
         try {

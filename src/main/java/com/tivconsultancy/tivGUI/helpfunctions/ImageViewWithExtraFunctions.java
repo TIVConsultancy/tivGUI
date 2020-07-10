@@ -27,7 +27,7 @@ public class ImageViewWithExtraFunctions extends ImageView {
     EventHandler<MouseEvent> zoom_drag;
     EventHandler<MouseEvent> zoom_pressed;
 
-    ObjectProperty<Point2D> mouseDown = new SimpleObjectProperty<>();
+    protected ObjectProperty<Point2D> mouseDown = new SimpleObjectProperty<>();
     
     protected boolean zoomDisabled = false;
     protected boolean dragDsiabled = false;
