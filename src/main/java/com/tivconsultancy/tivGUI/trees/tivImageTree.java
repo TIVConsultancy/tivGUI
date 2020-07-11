@@ -26,7 +26,7 @@ public class tivImageTree extends TreeView {
         super(new TreeItem<>("Input Files"));
         
         this.getRoot().getChildren().add(new TreeItem<>(new ImagePath("")));
-        setStyle("imageTree");
+        setStyle("imageTree");        
         this.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {

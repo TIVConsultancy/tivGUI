@@ -34,9 +34,9 @@ public class tivTabbedTree extends TabPane {
     protected ScrollPane scrollSettingsTree;
     protected ScrollPane scrollLog;
 
-    tivImageTree imageTree;
-    tivSettingsTree settingsTree;
-    LogTextArea logArea;
+    protected tivImageTree imageTree;
+    protected tivSettingsTree settingsTree;
+    protected LogTextArea logArea;
 
     public tivTabbedTree() {
 
@@ -138,6 +138,10 @@ public class tivTabbedTree extends TabPane {
     
     public void startNewSettingsTree(){
         settingsTree.startNewSession();
+    }
+    
+    public void selectImage(int i){
+        this.imageTree.getSelectionModel().select(i);
     }
     
 }
