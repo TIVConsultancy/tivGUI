@@ -144,4 +144,14 @@ public class tivTabbedTree extends TabPane {
         this.imageTree.getSelectionModel().select(i);
     }
     
+    public Tab getSettingsTab(){        
+        return tabSettings;                
+    }
+    
+    public void removeTab(String ident){
+        if(ident.toLowerCase().equals("settings")){
+            this.getTabs().remove(getSettingsTab());
+        }
+    }
+    
 }
