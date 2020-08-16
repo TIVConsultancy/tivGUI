@@ -124,9 +124,11 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
         }
 
         for (String s : selectedSeries) {
-            Series xy = new Series();
-            xy.setName(s);
-            clickedSeries.set(s, xy);
+            try {
+
+                Series xy = new Series();
+                xy.setName(s);
+                clickedSeries.set(s, xy);
 //            for (int i = 0; i < StaticReferences.controller.getPlotAbleOverTimeResults().getIndexedResults().getSize(); i++) {
 //                try {
 //                    Results1DPlotAble b = ((Results1DPlotAble) StaticReferences.controller.getPlotAbleOverTimeResults().getEntry(i));
@@ -137,18 +139,21 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
 //                    StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);
 //                }
 //            }
-            for (Iterator it = StaticReferences.controller.getPlotAbleOverTimeResults().getAllKeys().iterator(); it.hasNext();) {
-                String ident = (String) it.next();
-                try {
-                    Results1DPlotAble b = (Results1DPlotAble) StaticReferences.controller.getPlotAbleOverTimeResults().getRes(ident);
-                    Integer index = b.getIndex();
-                    Double value = b.getRes(s);
-                    xy.getData().add(new XYChart.Data(index, value));
-                } catch (Exception e) {
-                    StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);
+                for (Iterator it = StaticReferences.controller.getPlotAbleOverTimeResults().getAllKeys().iterator(); it.hasNext();) {
+                    String ident = (String) it.next();
+                    try {
+                        Results1DPlotAble b = (Results1DPlotAble) StaticReferences.controller.getPlotAbleOverTimeResults().getRes(ident);
+                        Integer index = b.getIndex();
+                        Double value = b.getRes(s);
+                        xy.getData().add(new XYChart.Data(index, value));
+                    } catch (Exception e) {
+                        StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);
+                    }
                 }
+                linePlot.getData().add(xy);
+            } catch (Exception e) {
+                StaticReferences.getlog().log(Level.SEVERE, "Cannot plot data from 1D Result", e);
             }
-            linePlot.getData().add(xy);
         }
         manageLineAppearance();
     }

@@ -64,5 +64,14 @@ public final class StaticReferences {
             standardIcons.add(new NameObject<>(f.getName(), new ImageView(new Image(f.toURI().toString(), 16, 16, true, true))));            
         }
     }
+    
+    public static BufferedImage scaleIMG(BufferedImage inputImage, int scaledWidth, int scaledHeight) {        
+        BufferedImage outputImage = new BufferedImage(scaledWidth,
+                                                      scaledHeight, inputImage.getType());
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
+        g2d.dispose();
+        return outputImage;
+    }
 
 }

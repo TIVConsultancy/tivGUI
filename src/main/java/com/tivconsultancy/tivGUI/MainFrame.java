@@ -136,7 +136,7 @@ public class MainFrame extends GridPane {
         GridPane.setRowIndex(anchorTimePlot, 1);
     }
 
-    private void setContraints() {
+    protected void setContraints() {
 
         columnConstraintsMainFame = new ColumnConstraints();
         rowConstraintsMenuBar = new RowConstraints();
