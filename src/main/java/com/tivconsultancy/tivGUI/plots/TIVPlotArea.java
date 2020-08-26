@@ -24,6 +24,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -81,7 +82,7 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
 
             linePlot.addLinePlotCoordinates("VertPl", Math.round(Double.valueOf(linePlot.getXAxis().getValueForDisplay(x).toString())), Double.NaN, Math.round(Double.valueOf(linePlot.getXAxis().getValueForDisplay(x).toString())), Double.NaN);
 //            linePlot.addLinePlotCoordinates("HoriPl", Double.NaN, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()), Double.NaN, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()));
-            linePlot.addLinePlotCoordinates("HoriPl", 0, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()), 100, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()));
+            linePlot.addLinePlotCoordinates("HoriPl", 0, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()), 10000, Double.valueOf(linePlot.getYAxis().getValueForDisplay(y).toString()));
 
         });
 
@@ -116,6 +117,19 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
             }
         }
         replot();
+    }
+
+    public void activateLayerSelection(String ident) {
+        try {
+            for(MenuItem m : availLayers.getItems()){
+                if(m.getText().equals(ident)){
+                    ((CheckMenuItem) m).setSelected(true);
+                    ((CheckMenuItem) m).fire();
+                }
+            }
+        } catch (Exception e) {
+        }
+
     }
 
     public void replot() {

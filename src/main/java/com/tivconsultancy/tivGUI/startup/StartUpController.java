@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import com.tivconsultancy.opentiv.datamodels.overtime.DataBaseEntry;
 import com.tivconsultancy.opentiv.datamodels.overtime.Database;
 import com.tivconsultancy.tivGUI.controller.subControllerImageTools;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.control.Dialog;
@@ -38,7 +39,7 @@ public class StartUpController extends BasicController {
     Map<String, Dialog> openDialogBoxes = new HashMap<>();
     protected Result1D results1D;
 
-    public StartUpController() {
+    public StartUpController() throws IOException {
         this.main = null;
         initDatabase();
         currentMethod = new StartUpMethod();
@@ -51,7 +52,7 @@ public class StartUpController extends BasicController {
         data = new DatabaseRAM();
     }
 
-    private void initSubControllers() {
+    private void initSubControllers() throws IOException {
         subViews = new StartUpSubControllerViews(this);
         subPlots = new StartUpSubControllerPlots();
         subMenu = new StartUpSubControllerMenu();

@@ -9,6 +9,7 @@ import com.tivconsultancy.opentiv.datamodels.TempOnDisk;
 import com.tivconsultancy.tivGUI.MainFrame;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.tivGUI.TIVScene;
+import com.tivconsultancy.tivGUI.helpfunctions.Dummy;
 import com.tivconsultancy.tivGUI.logging.Windowhandler;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,14 +40,14 @@ public class run extends Application {
     
     public static void showEmptyMainFrame(Stage primaryStage) throws IOException {
                         
-        StaticReferences.setStandardIcons(new StartUpController(), "com/tivconsultancy/tivGUI/icons/menuicons/");
+        StaticReferences.setStandardIcons(new Dummy(), "/com/tivconsultancy/tivGUI/icons/menuicons/");
         
         List<String> icons = new ArrayList<>();
         icons.add("/com/tivconsultancy/tivGUI/icons/Icon128x128.png");
         icons.add("/com/tivconsultancy/tivGUI/icons/Icon64x64.png");
         icons.add("/com/tivconsultancy/tivGUI/icons/Icon32x32.png");
         icons.add("/com/tivconsultancy/tivGUI/icons/Icon16x16.png");
-        MainFrame.setIcons(new StartUpController().getClass(), icons);
+        MainFrame.setIcons(new Dummy().getClass(), icons);
         
         StaticReferences.controller = new StartUpController();        
         MainFrame tivGUI = new MainFrame();

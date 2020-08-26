@@ -14,6 +14,7 @@ import com.tivconsultancy.tivGUI.controller.ControllerUI;
 import com.tivconsultancy.tivGUI.controller.subControllerMenu;
 import com.tivconsultancy.tivGUI.controller.subControllerSQL;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class StartUpSubControllerMenu implements subControllerMenu {
     LookUp<ImageView> icons;
     List<String> mainMenu;
 
-    public StartUpSubControllerMenu() {
+    public StartUpSubControllerMenu() throws IOException {
         StaticReferences.initIcons(this);
         initMainItems();
         initMainEntries();
@@ -75,7 +76,7 @@ public class StartUpSubControllerMenu implements subControllerMenu {
 
     }
 
-    private void initIcons() {
+    private void initIcons() throws IOException {
         icons = new LookUp<>();
         icons.add(new NameObject<>(dictionary(MenuEntries.New), StaticReferences.standardIcons.get("plus2.png")));
         icons.add(new NameObject<>(dictionary(MenuEntries.Load), StaticReferences.standardIcons.get("folderOpen2.png")));
