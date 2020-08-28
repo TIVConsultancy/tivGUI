@@ -53,6 +53,7 @@ public class run extends Application {
         MainFrame tivGUI = new MainFrame();
         TIVScene scene = new TIVScene(tivGUI);
         StaticReferences.controller.setScene(scene);
+        StaticReferences.controller.setGUI(tivGUI);
         JMetro jMetro = new JMetro(Style.DARK);
 
 //        jMetro.setScene(scene);
