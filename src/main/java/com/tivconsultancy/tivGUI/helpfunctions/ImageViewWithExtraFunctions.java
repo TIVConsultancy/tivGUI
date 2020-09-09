@@ -7,8 +7,10 @@ package com.tivconsultancy.tivGUI.helpfunctions;
 
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.tivGUI.controller.ControllerWithImageInteraction;
+import java.awt.image.BufferedImage;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -165,6 +167,11 @@ public class ImageViewWithExtraFunctions extends ImageView {
     
     public void disableDrag(){
         this.dragDsiabled = true;
+    }
+    
+    public BufferedImage getBuffImage(){
+        BufferedImage bimg = new BufferedImage((int) this.getImage().getWidth(), (int) this.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
+        return SwingFXUtils.fromFXImage(this.getImage(), bimg);
     }
     
 //    @Override 

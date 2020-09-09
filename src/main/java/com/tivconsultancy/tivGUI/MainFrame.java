@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.layout.RowConstraints;
 
@@ -46,7 +47,7 @@ public class MainFrame extends GridPane {
     protected TIVPlotArea anchorTimePlot;
 
     protected ScrollPane scrollPanDetails;
-    protected AnchorPane scrollPaneDataViewer;
+    protected Region scrollPaneDataViewer;
 
     public static List<Image> iconsTIVGUIMainFrame;
     public static Image loadGif;
@@ -116,7 +117,7 @@ public class MainFrame extends GridPane {
     }
 
     private void setDataView() {
-        scrollPaneDataViewer.getChildren().add(dataView);
+        ((AnchorPane) scrollPaneDataViewer).getChildren().add(dataView);
         AnchorPane.setTopAnchor(dataView, 0.0);
         AnchorPane.setRightAnchor(dataView, 0.0);
         AnchorPane.setBottomAnchor(dataView, 0.0);

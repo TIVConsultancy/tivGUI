@@ -34,7 +34,7 @@ public class tivTabbedTree extends TabPane {
     protected ScrollPane scrollSettingsTree;
     protected ScrollPane scrollLog;
 
-    protected tivImageTree imageTree;
+    public tivImageTree imageTree;
     protected tivSettingsTree settingsTree;
     protected LogTextArea logArea;
 
