@@ -35,7 +35,7 @@ public class tivImageTree extends TreeView {
                     return;
                 }
                 try {                    
-                    StaticReferences.controller.setSelectedFile( oldValue == null? null : ((TreeItemFile) oldValue).getFile(), ((TreeItemFile) newValue).getFile());
+                    StaticReferences.controller.setSelectedFile( (oldValue == null || !(oldValue instanceof TreeItemFile)) ? null : ((TreeItemFile) oldValue).getFile(), ((TreeItemFile) newValue).getFile());
                 } catch (Exception e) {
                     StaticReferences.getlog().log(Level.INFO, "Cannot view or set file", e);
                 }                
