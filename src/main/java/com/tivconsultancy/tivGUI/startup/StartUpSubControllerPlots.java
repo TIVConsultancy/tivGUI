@@ -9,6 +9,7 @@ package com.tivconsultancy.tivGUI.startup;
 import com.tivconsultancy.tivGUI.controller.subControllerPlots;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.paint.Color;
 
 /**
@@ -59,6 +60,11 @@ public class StartUpSubControllerPlots implements subControllerPlots {
     @Override
     public List<String> getLineSymbols() {
         return shapes;
+    }
+
+    @Override
+    public String getName(String s) {
+        return s;
     }
 
 }

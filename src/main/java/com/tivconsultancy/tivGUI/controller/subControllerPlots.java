@@ -6,6 +6,7 @@
 package com.tivconsultancy.tivGUI.controller;
 
 import java.util.List;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.paint.Color;
 
 /**
@@ -18,5 +19,6 @@ public interface subControllerPlots {
     public String getIndexedPlotYAxisName();
     public List<Color> getLineColors();
     public List<String> getLineSymbols();
+    public String getName(String s);
     
 }

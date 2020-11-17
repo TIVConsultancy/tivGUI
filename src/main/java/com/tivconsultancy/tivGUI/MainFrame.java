@@ -236,5 +236,9 @@ public class MainFrame extends GridPane {
     public void activateImageTree(){
         tabPane.imageTree.setDisable(false);        
     }
+    
+    public MenuBar getMenueBar(){
+        return menuBar;
+    }
 
 }

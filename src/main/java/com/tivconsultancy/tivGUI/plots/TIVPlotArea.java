@@ -39,16 +39,16 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
 
     protected BorderPane borderPane;
     protected MenuButton availLayers;
-    MultiClassLinePlot linePlot;
+    protected MultiClassLinePlot linePlot;
     // Implement operations performed on data: smoothing, derivation, scaling etc.
-    MultiClassLinePlot Operations;
-    Region parent;
-    private LookUp<Series> clickedSeries = new LookUp<>();
-    private LookUp<Color> colorOfPlot = new LookUp<>();
-    private LookUp<String> symbolOfPlot = new LookUp<>();
-    private List<String> selectedSeries = new ArrayList<>();
-    private int colorCounter = 0;
-    private int symbolCounter = 0;
+    protected MultiClassLinePlot Operations;
+    protected Region parent;
+    protected LookUp<Series> clickedSeries = new LookUp<>();
+    protected LookUp<Color> colorOfPlot = new LookUp<>();
+    protected LookUp<String> symbolOfPlot = new LookUp<>();
+    protected List<String> selectedSeries = new ArrayList<>();
+    protected int colorCounter = 0;
+    protected int symbolCounter = 0;
 
     public TIVPlotArea() {
         this(null);
@@ -105,14 +105,15 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
     }
 
     private void changeLayerSelection(CheckMenuItem o, ActionEvent ev) {
-        selectedSeries.remove(o.getText());
+        String seriesName = o.getText(); //StaticReferences.controller.getViewControllerPlots(null).getName(o);
+        selectedSeries.remove(seriesName);
         if (o.isSelected()) {
-            clickedSeries.addDuplFree(new NameObject(o.getText(), new Series()));
-            selectedSeries.add(o.getText());
-            if (colorOfPlot.addDuplFree(new NameObject<>(o.getText(), getLineColor(colorCounter)))) {
+            clickedSeries.addDuplFree(new NameObject(seriesName, new Series()));
+            selectedSeries.add(seriesName);
+            if (colorOfPlot.addDuplFree(new NameObject<>(seriesName, getLineColor(colorCounter)))) {
                 colorCounter++;
             }
-            if (symbolOfPlot.addDuplFree(new NameObject<>(o.getText(), getSymbol(symbolCounter)))) {
+            if (symbolOfPlot.addDuplFree(new NameObject<>(seriesName, getSymbol(symbolCounter)))) {
                 symbolCounter++;
             }
         }
@@ -141,7 +142,7 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
             try {
 
                 Series xy = new Series();
-                xy.setName(s);
+                xy.setName(StaticReferences.controller.getViewControllerPlots(null).getName(s));
                 clickedSeries.set(s, xy);
 //            for (int i = 0; i < StaticReferences.controller.getPlotAbleOverTimeResults().getIndexedResults().getSize(); i++) {
 //                try {
@@ -208,7 +209,7 @@ public class TIVPlotArea extends AnchorPane implements Refreshable {
         return shapes.get(internalIndex);
     }
 
-    private void manageLineAppearance() {
+    protected void manageLineAppearance() {
         String newColor = "";
         for (String s : selectedSeries) {
             newColor = newColor + String.format("CHART_COLOR_" + (selectedSeries.indexOf(s) + 1) + ": %s ;", formatColorToRGB(colorOfPlot.get(s)));
