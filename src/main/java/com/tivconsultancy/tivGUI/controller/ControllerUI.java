@@ -45,7 +45,7 @@ public interface ControllerUI extends Controller {
     
     public static enum DialogNames_Default{
         SQL, CUT, PROCESS
-    }
+    }    
             
             
 

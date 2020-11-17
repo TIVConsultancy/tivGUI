@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -152,6 +153,14 @@ public class tivTabbedTree extends TabPane {
         if(ident.toLowerCase().equals("settings")){
             this.getTabs().remove(getSettingsTab());
         }
+    }
+    
+    public void replacesettingsTree(tivSettingsTree treeV){
+        anchorSettingsTree.getChildren().remove(settingsTree);
+        settingsTree = treeV;
+        anchorSettingsTree.getChildren().add(settingsTree);
+        setAnchors();
+        startNewSettingsTree();
     }
     
 }
