@@ -25,9 +25,9 @@ import javafx.scene.input.ScrollEvent;
  */
 public class ImageViewWithExtraFunctions extends ImageView {
 
-    EventHandler<ScrollEvent> zoom_scroll;
-    EventHandler<MouseEvent> zoom_drag;
-    EventHandler<MouseEvent> zoom_pressed;
+    protected EventHandler<ScrollEvent> zoom_scroll;
+    protected EventHandler<MouseEvent> zoom_drag;
+    protected EventHandler<MouseEvent> zoom_pressed;
 
     protected ObjectProperty<Point2D> mouseDown = new SimpleObjectProperty<>();
     
