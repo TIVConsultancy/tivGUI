@@ -30,7 +30,7 @@ import javafx.scene.layout.RowConstraints;
  */
 public class MainFrame extends GridPane {
 
-    protected MenuBar menuBar;
+    protected MenuBar menuBarLeft;
     protected GridPane gridContentPane;
     protected tivSettingsDetails tableDetails;
     protected tivTabbedTree tabPane;
@@ -62,7 +62,7 @@ public class MainFrame extends GridPane {
         setTreeView();
         setDataView();
 
-        getChildren().add(menuBar);
+        getChildren().add(menuBarLeft);
 
         gridContentPane.getChildren().add(scrollPaneDataViewer);
         gridContentPane.getChildren().add(anchorTimePlot);
@@ -74,7 +74,7 @@ public class MainFrame extends GridPane {
 
     private void initComponents() {
         gridContentPane = new GridPane();
-        menuBar = new tivMenuBar();
+        menuBarLeft = new tivMenuBar();
 
         tabPane = new tivTabbedTree();
         scrollPanDetails = new ScrollPane();
@@ -238,7 +238,7 @@ public class MainFrame extends GridPane {
     }
     
     public MenuBar getMenueBar(){
-        return menuBar;
+        return menuBarLeft;
     }
 
 }
