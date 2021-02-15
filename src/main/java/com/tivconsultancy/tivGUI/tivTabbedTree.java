@@ -11,6 +11,7 @@ import com.tivconsultancy.tivGUI.trees.tivSettingsTree;
 import com.tivconsultancy.tivGUI.trees.tivImageTree;
 import java.util.List;
 import java.util.logging.Level;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -161,6 +162,10 @@ public class tivTabbedTree extends TabPane {
         anchorSettingsTree.getChildren().add(settingsTree);
         setAnchors();
         startNewSettingsTree();
+    }
+    
+    public void addtab(int index, Tab tab){
+        getTabs().add(index, tab);
     }
     
 }

@@ -161,11 +161,11 @@ public class ImageViewWithExtraFunctions extends ImageView {
                 viewport.getMinY() + yProportion * viewport.getHeight());
     }
     
-    public void disableZoom(){
+    public final void disableZoom(){
         this.zoomDisabled = true;
     }
     
-    public void disableDrag(){
+    public final void disableDrag(){
         this.dragDsiabled = true;
     }
     
