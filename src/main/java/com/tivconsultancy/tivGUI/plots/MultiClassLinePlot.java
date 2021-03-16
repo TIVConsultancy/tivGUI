@@ -10,7 +10,6 @@ import com.tivconsultancy.opentiv.math.specials.NameObject;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
