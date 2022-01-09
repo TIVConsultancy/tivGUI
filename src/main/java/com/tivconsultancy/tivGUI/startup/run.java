@@ -5,13 +5,16 @@
  */
 package com.tivconsultancy.tivGUI.startup;
 
+import com.tivconsultancy.opentiv.datamodels.TempOnDisk;
 import com.tivconsultancy.tivGUI.MainFrame;
 import com.tivconsultancy.tivGUI.StaticReferences;
 import com.tivconsultancy.tivGUI.TIVScene;
 import com.tivconsultancy.tivGUI.helpfunctions.Dummy;
+import com.tivconsultancy.tivGUI.logging.Windowhandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -60,8 +63,16 @@ public class run extends Application {
         primaryStage.getIcons().addAll(MainFrame.getIcon());
         primaryStage.setTitle("tivGUI mainFrame");
         primaryStage.setScene(scene);
+//        primaryStage.setFullScreen(true);
+//        primaryStage.setMaximized(true);
         primaryStage.show();
+//        PIVMethod method = new PIVMethod(new File("D:\\Sync\\TIVConsultancy\\_Customers\\HZDR\\DataProject\\FolderHZDRDataManagement\\Examples-2020-3-30 20.46.28\\NabilLongColumn\\NaCl\\1p0"));
         tivGUI.startNewSession();
+//        StaticReferences.getlog().addHandler(Windowhandler.getInstance());
+//        StaticReferences.getlog().log(Level.SEVERE, "sfsdfsdfsdf");
+//        Windowhandler.log(Level.SEVERE, "sfsdf", new Throwable());
+//        StaticReferences.controller.getCurrentMethod().run();
+//            new TempOnDisk(null);
     }
     
 }

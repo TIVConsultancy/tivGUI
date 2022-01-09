@@ -7,11 +7,8 @@ package com.tivconsultancy.tivGUI.controller;
 
 import com.tivconsultancy.opentiv.datamodels.Refreshable;
 import com.tivconsultancy.opentiv.highlevel.controller.Controller;
+import com.tivconsultancy.opentiv.datamodels.Result1D;
 import com.tivconsultancy.tivGUI.MainFrame;
-import com.tivconsultancy.tivGUI.StaticReferences;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.stage.Window;
@@ -39,10 +36,6 @@ public interface ControllerUI extends Controller {
     public void refreshSettings();
     
     public Dialog getDialog(Enum ident);
-    default public List<Dialog> getAllDialog(){
-        StaticReferences.getlog().log(Level.WARNING, "Method not implemented, empty returned");
-        return new ArrayList<>();
-    }
     public void setDialog(Enum ident, Dialog dialogBox);
     
     public void blockUIForProceess();

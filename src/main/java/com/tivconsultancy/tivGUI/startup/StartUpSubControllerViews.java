@@ -29,15 +29,15 @@ public class StartUpSubControllerViews implements subControllerViews {
 
     public StartUpSubControllerViews(ControllerUI main) {
         this.main = main;
-        buildLookUp();        
+        buildLookUp();
     }
 
     private void buildLookUp() {
         lookupTable = new LookUp<>();
         for (Protocol p : main.getCurrentMethod().getProtocols()) {
-            for ( Object s : p.getIdentForViews()) {
+            for (Object s : p.getIdentForViews()) {
                 lookupTable.add(new NameObject<>(s.toString(), new ViewContainerImagesFit(p.getView(s.toString()), s.toString()) {
-                                         }));
+                }));
             }
         }
     }
@@ -49,7 +49,7 @@ public class StartUpSubControllerViews implements subControllerViews {
         }
         return new Label("Reference not found: " + ident);
     }
-    
+
     @Override
     public ViewerContainer getViewContainer(String ident) {
         if (lookupTable.get(ident) != null) {
@@ -72,16 +72,16 @@ public class StartUpSubControllerViews implements subControllerViews {
 
     @Override
     public void update() {
-        for (Protocol p : main.getCurrentMethod().getProtocols()) {            
+        for (Protocol p : main.getCurrentMethod().getProtocols()) {
             for (Object s : p.getIdentForViews()) {
-                if(p.getView(s.toString()) == null){
+                if (p.getView(s.toString()) == null) {
                     lookupTable.get(s.toString()).update(new ImageInt(50, 50, 0).getBuffImage());
-                }else{
+                } else {
                     lookupTable.get(s.toString()).update(p.getView(s.toString()));
                 }
-                
+
             }
         }
     }
 
-}
+            }

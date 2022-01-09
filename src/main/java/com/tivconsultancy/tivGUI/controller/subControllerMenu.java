@@ -8,7 +8,6 @@ package com.tivconsultancy.tivGUI.controller;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 /**
@@ -39,6 +38,6 @@ public interface subControllerMenu {
      * @param ident name of the icon
      * @return ImageView containing the icon that should be displayed
      */
-    public Node getIcon(String ident);
+    public ImageView getIcon(String ident);
     
 }
