@@ -25,7 +25,7 @@ public final class StaticReferences {
     public static ControllerUI controller = null;
 
     private static Logger logger = Logger.getLogger("tivGUI");
-
+    
     Windowhandler loggingWindow = Windowhandler.getInstance();
 //    public static LookUp<ImageView> standardIcons = new LookUp<>();
     public static ImageLoaderResourcesIcons standardIcons;
@@ -51,7 +51,7 @@ public final class StaticReferences {
 
     public static void initIcons(Object o) {
     }
-    
+
     public static void setStandardIcons(Object o, String source) throws IOException {
         standardIcons = new ImageLoaderResourcesIcons(source, o);
 
@@ -82,10 +82,9 @@ public final class StaticReferences {
 //        }
 //
 //    }
-
     public static BufferedImage scaleIMG(BufferedImage inputImage, int scaledWidth, int scaledHeight) {
         BufferedImage outputImage = new BufferedImage(scaledWidth,
-                                                      scaledHeight, inputImage.getType());
+                scaledHeight, inputImage.getType());
         Graphics2D g2d = outputImage.createGraphics();
         g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
         g2d.dispose();

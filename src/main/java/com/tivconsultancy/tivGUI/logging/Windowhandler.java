@@ -56,8 +56,8 @@ public class Windowhandler extends Handler {
         setLevel(Level.ALL);
 //        setLevel(level != null ? Level.parse(level) : Level.INFO);
         if (window == null) {
-            window = LogTextArea.getInstance();
-        }
+               window = LogTextArea.getInstance(); 
+            }
         setFormatter(new Formatter() {
 
             @Override
@@ -91,8 +91,8 @@ public class Windowhandler extends Handler {
 
     public static synchronized Windowhandler getInstance() {
         if (handler == null) {
-            handler = new Windowhandler();
-        }
+                handler = new Windowhandler();
+            }
         return handler;
     }
 
@@ -114,7 +114,7 @@ public class Windowhandler extends Handler {
 
         StaticReferences.getlog().
                 log(lvl,
-                    msg);
+                        msg);
 
 //        if (o instanceof Exception && lvl.equals(Level.SEVERE)) {
 //            Exception e = (Exception) o;
