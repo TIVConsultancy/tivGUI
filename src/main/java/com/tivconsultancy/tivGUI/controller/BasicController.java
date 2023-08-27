@@ -39,6 +39,7 @@ public abstract class BasicController implements ControllerWithImageInteraction,
     protected subControllerMenu subMenu;
     protected subControllerLogging subLog;
     protected subControllerSQL subSQL;
+    protected subControllerVoid subVoid;
     protected subControllerImageTools subImageTools;
 
     protected Settings hints;
